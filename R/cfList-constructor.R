@@ -18,10 +18,10 @@ cfList <- function(samples=NULL, expr=NULL, counts=NULL){
   x <- list(samples = samples, expr = expr, counts = counts)
   class(x) <- "cfList"
 
-  if(missing(counts)){
-    cat("agrument \"counts\" is missing, using default `cellCounts`")
-    x <- cellCounts(x)
-  }
+  #if(missing(counts)){
+    # cat("agrument \"counts\" is missing, using default `cellCounts`")
+  #  x <- cellCounts(x)
+  #}
 
   x
 }
