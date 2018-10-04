@@ -1,0 +1,16 @@
+Package: cytofast
+Title: cytofast - A quick visualization and analysis tool for CyTOF data
+Version: 0.0.0.9017
+Authors@R: c(person("K.A.", "Stam", email = "k.a.stam@lumc.nl", role = c("aut", "cre")),
+	           person("G.", "Beyrend", email = "G.Beyrend@lumc.nl", role = "aut"))
+Description: Cytofast can be used to visualize and explore CyTOF data.
+Depends: R (>= 3.5.0)
+Imports: flowCore, ggplot2, ggridges, globaltest, RColorBrewer, reshape2, stats, grDevices, Rdpack
+RdMacros: Rdpack
+Suggests: knitr, rmarkdown, FlowSOM
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0
+Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
