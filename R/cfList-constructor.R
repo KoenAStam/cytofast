@@ -19,7 +19,7 @@ cfList <- function(samples=NULL, expr=NULL, counts=NULL){
   class(x) <- "cfList"
 
   if(missing(counts)){
-    warning("agrument \"counts\" is missing, using default `cellCounts`")
+    cat("agrument \"counts\" is missing, using default `cellCounts`")
     x <- cellCounts(x)
   }
 
