@@ -14,6 +14,7 @@
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @importFrom stats median hclust dist
+#' @importFrom methods is
 #'
 #' @export
 
@@ -36,8 +37,6 @@ cytoBoxplots <- function(cfList, group, stat){
   }
   if(is(group, "factor") && length(group) == nrow(cfList$counts)){
     grouping <- group
-  } else {
-    stop("\"group\" is a factor, but is not of same length as nrow `counts` slot")
   }
 
   plotData <- reshape2::melt(cbind(grouping, data.frame(cfList$counts, check.names=F)), id.vars=1)

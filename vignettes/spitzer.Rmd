@@ -1,10 +1,12 @@
 ---
 title: "Cytofast - vignette for the Spitzer study"
-author: "K.A. Stam & G. Beyrend"
+author: 
+ - "K.A. Stam"
+ - "G. Beyrend"
+package: cytofast
 date: '`r Sys.Date()`'
 output:
-  pdf_document: default
-  html_document: rmarkdown::html_vignette
+  BiocStyle::pdf_document:
 bibliography: REFERENCES.bib
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -12,7 +14,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Introduction
+```{r style, echo=F, results = "asis"}
+BiocStyle::markdown()
+```
+
+
+# Introduction
  
 *Cytofast* is a R-package aimed at quickly visualizing and analyzing the output of [Cytosplore](https://www.cytosplore.org/), which is software that characterizes immune subsets from flow or mass cytometry (CyTOF) data. Cytosplore is mainly used for its fine implementation of t-sne (and HSNE) algorithm to identify and cluster distinct populations of cells. However, further downstream analysis is unsupported, such as relating these population of cells to a phenotype and/or ascribing any experimental effects. Therefore we introduce the *cytofast* package, which provides a quick visualization and quantification of clusters (or combination of clusters) playing a key role in your study. 
 

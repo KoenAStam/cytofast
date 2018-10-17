@@ -14,6 +14,7 @@
 #'
 #'
 #' @importFrom stats t.test p.adjust
+#' @importFrom methods is
 #'
 cytottest <- function(cfList, group, adjustMethod,  ...){
 
@@ -35,8 +36,6 @@ cytottest <- function(cfList, group, adjustMethod,  ...){
   }
   if(is(group, "factor") && length(group) == nrow(cfList$counts)){
     grouping <- group
-  } else {
-    stop("\"group\" is a factor, but is not of same length as nrow `counts` slot")
   }
 
   X <- cfList$counts
