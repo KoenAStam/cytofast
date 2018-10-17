@@ -19,7 +19,7 @@
 
 cytoBoxplots <- function(cfList, group, stat){
 
-  if(class(cfList) != "cfList"){
+  if(!is(cfList, "cfList")){
     stop("first argument is not of class \"cfList\"")
   }
 
@@ -27,15 +27,17 @@ cytoBoxplots <- function(cfList, group, stat){
     stop("`counts` slot is missing from \"cfList\"")
   }
 
-  if(class(group) == "character" & length(group) == 1){
+  if(is(group, "character") && length(group) == 1){
     if(group %in% colnames(cfList$samples)){
       grouping <- factor(cfList$samples[,group])
     } else {
         stop("\"group\" is a character, but is missing from `samples` slot ")
       }
   }
-  if(class(group) == "factor" && length(group) == nrow(cfList$counts)){
+  if(is(group, "factor") && length(group) == nrow(cfList$counts)){
     grouping <- group
+  } else {
+    stop("\"group\" is a factor, but is not of same length as nrow `counts` slot")
   }
 
   plotData <- reshape2::melt(cbind(grouping, data.frame(cfList$counts, check.names=F)), id.vars=1)

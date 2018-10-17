@@ -113,14 +113,14 @@ levels(cfData$expr$sampleID) <- cfData$samples$sample_name
 
 ### Heatmaps
 
-However, first we will address the last slot `counts`, which is still empty. To fill this slot we can call the function `cellCounts`. The default function will simply add the raw cell counts per cluster per sample into the cfList. 
+Before we can create the heatmaps, we first address the last slot `counts`, which is still empty. To fill this slot we can call the function `cellCounts`. The default function will simply add the raw cell counts per cluster per sample into the cfList. 
 
 ```{r}
 cfData <- cellCounts(cfData)
 head(cfData$counts)
 ```
 
-In many cases the abundance of the cells could be biased in respect to the sample size of the donors, therefore it could make more sense to look at the frequency of the clusters in respect to the total amount of cells per sample. We will also standardize the data (mean zero, unit variance) to make a fairer comparison between clusters.
+In many cases the abundance of the cells could be biased in respect to the sample size of the donors, therefore it could be more logical to look at the frequency of the clusters in respect to the total amount of cells per sample. We will also standardize the data (mean zero, unit variance) to better comapre the clusters.
 
 ```{r}
 cfData <- cellCounts(cfData, frequency = T, scale = T)
