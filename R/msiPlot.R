@@ -65,7 +65,7 @@ msiPlot <- function(cfList, markers, byGroup = NULL, byCluster = NULL, ...){
       X <- data.frame(X, groups, check.names=F)
       legendtitle <- "groups"
     } else {
-        stop("\"group\" is a character, but is missing from `samples` slot")
+        stop("\"byGroup\" is a character, but is missing from `samples` slot")
       }
   }
 

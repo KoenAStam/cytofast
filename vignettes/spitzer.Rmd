@@ -7,7 +7,7 @@ author:
 package: cytofast
 date: '`r Sys.Date()`'
 output:
-  BiocStyle::pdf_document:
+  BiocStyle::pdf_document
 bibliography: REFERENCES.bib
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -57,7 +57,7 @@ knitr::include_graphics("images/cytosplore.png")
   
 We advise using a simple name (characters only) when renaming the output files, this makes identification and further handling easier. After saving, we will have a folder with the created .fcs files, with each file corresponding to your identified clusters in *Cytosplore*. The next step will be loading the files into R with the help of `cytofast`. 
 
-# Reading the data (clusters)
+# Reading the data 
 
 Let's start with loading the package.
 
@@ -114,8 +114,6 @@ Lastly, we will make some small changes to the labeling of the data. This helps 
 levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
 levels(cfData$expr$sampleID) <- cfData$samples$sample_name
 ```
-
-\clearpage
 
 # 3. Visualization
 
