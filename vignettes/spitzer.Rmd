@@ -1,5 +1,6 @@
 ---
 title: "Cytofast - vignette for the Spitzer study"
+shorttitle: "Cytofast"
 author: 
  - "K.A. Stam"
  - "G. Beyrend"
@@ -35,28 +36,28 @@ The workflow is designed around several steps, which are addressed per section. 
 4. `cytoBoxPlots`: creates boxplots (percentage of total given cells) and representing each cluster as a percentage of the total analyzed immune cells  
 5. Eventually, we propose further possible analysis by presenting results obtained with a global test comparison. 
 
-## 1. Creating clusters
+# Creating clusters
 
 Before running your samples through *cytofast*, the data should be clustered. We recommend using Cytosplore for this task, however it is certainly possible to use any other clustering algorithm. As an example, we will also show how data clustered by [FlowSOM](https://bioconductor.org/packages/release/bioc/html/FlowSOM.html) can be parsed for usage with cytofast.
 
-### Creating clusters in *Cytosplore*
+## Creating clusters in *Cytosplore*
 
 After downloading *Cytosplore*, hosted at www.cytosplore.org, upload the FCS files by clicking on *File* then *Open FCS File(s)*.
 Be sure to add unique sample tag as channel when prompted and select a cofactor for hyperbolic arcsinh transformation (default is 5).
 
 Click on *Run H-SNE* and wait for the map being generated. This step may require some time depending on the number of cells analyzed.
 
-### Exporting the data
+## Exporting the data
  
 Once the tSNE map is generated, we can save the clusters defined by *Cytosplore* by right-clicking on the tSNE map and save the clusters as **"Save Clusters ..."**" (Figure \ref{fig:fig1}). We can choose the directory of the output files as prompted by *Cytosplore*; make sure to note this location, because we will use this directory to load the .fcs files into R.
 
-```{r fig1, out.width='50%', fig.align='center', fig.cap="\\label{fig:fig1}Saving clusters in Cytosplore", echo=F}
+```{r fig1, fig.align='center', fig.cap="\\label{fig:fig1}Saving clusters in Cytosplore", echo=F}
 knitr::include_graphics("images/cytosplore.png")
 ```
   
 We advise using a simple name (characters only) when renaming the output files, this makes identification and further handling easier. After saving, we will have a folder with the created .fcs files, with each file corresponding to your identified clusters in *Cytosplore*. The next step will be loading the files into R with the help of `cytofast`. 
 
-## 2. Reading the data (clusters)
+# Reading the data (clusters)
 
 Let's start with loading the package.
 
@@ -91,7 +92,7 @@ cfData$expr[1:5, 1:5]
 
 As shown, both clusterID and sampleID are added to the expression data. We also see that there are some 'markers' that we don't want in our heatmaps. Therefore, in the next section we will clean-up the data and add some meta information to the `cfList`. 
 
-### Cleaning up the data
+## Cleaning up the data
 
 Some channels are not needed (e.g. DNA1, DNA2, barcoding, etc...). We can remove those and only keep the markers that we are actually intrested in. 
 
@@ -116,9 +117,9 @@ levels(cfData$expr$sampleID) <- cfData$samples$sample_name
 
 \clearpage
 
-## 3. Visualization
+# 3. Visualization
 
-### Heatmaps
+## Heatmaps
 
 Before we can create the heatmaps, we first address the last slot `counts`, which is still empty. To fill this slot we can call the function `cellCounts`. The default function will simply add the raw cell counts per cluster per sample into the cfList. 
 
@@ -147,7 +148,7 @@ The function will plot two heatmaps:
 A hierarchical clustering was performed on subset frequencies using the Spearmans rank correlation, resulting in a dendogram displayed on the side of the sample abundancy heatmap. This will group sample sharing similarities.  
 Groups can pre-defined as an input to 'cytoHeatmaps'. 
 
-### boxplots  
+## boxplots  
 
 We can also represents the data obtained in a quantitative way by calling the function `cytoBoxplots`. The output of this function represents the proportion of each sample for every cluster.  
 
@@ -155,7 +156,7 @@ We can also represents the data obtained in a quantitative way by calling the fu
 cytoBoxplots(cfData, group = "group")
 ```
 
-### density plots (median signal intensity)
+## density plots (median signal intensity)
 
 According to the *Spitzer et al., Cell, 2017* study, an effective therapy lead to an upregulation of MHC-II. This actually can be seen by drawing the median intensity plots for this marker, as shown below together with CD45 and CD4. 
 
@@ -165,20 +166,17 @@ msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), group='group')
 
 On this MSI plot, it indeed appears that the MHC-II signal is higher in the Effective therapy day 3 and day 8 compared to the Ineffective therapy day 3 and day 8.  
 
-## 4. Statistical testing
+# 4. Statistical testing
 
-
-
-
-### simple t.test
+## simple t.test
 
 For further analysis, we will use the function 'globaltest'. This will guide us to find a cluster or a combination of clusters which are significantly different between groups.   
 
-### global test
+## global test
 
-## 5. Extra's
+# 5. Extra's
 
-### clustering with flowSOM
+## clustering with flowSOM
 
 It is also possible to use other clustering algorithms 
 
@@ -205,8 +203,7 @@ From here it is of course possible to construct a new cfList and go through the 
 cfData$expr$clusterID <- clusterID_FS
 
 # Update cellCounts with new clusters
-cfData <- cfData
-
+cfData
 cytoHeatmaps(cfData, group='group', legend=T)
 ```
 

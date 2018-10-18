@@ -5,7 +5,7 @@
 #'
 #' @param cfList a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'counts' slot.
 #' @param group one of:
-#' * a character vector referring to a column name in the `samples` slot of the `cfList`.
+#' * a character referring to a column name in the `samples` slot of the `cfList`.
 #' * a factor indicating the grouping (x-axis) for the boxplots.
 #' @param stat ignore, will be implemented soon.
 #'
