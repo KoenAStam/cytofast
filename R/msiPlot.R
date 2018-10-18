@@ -18,7 +18,7 @@
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @importFrom ggridges geom_density_ridges theme_ridges
-#' @importFrom stats is
+#' @importFrom methods is
 #'
 #' @export
 

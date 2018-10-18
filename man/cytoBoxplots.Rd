@@ -11,7 +11,7 @@ cytoBoxplots(cfList, group, stat)
 
 \item{group}{one of:
 \itemize{
-\item a character vector referring to a column name in the \code{samples} slot of the \code{cfList}.
+\item a character referring to a column name in the \code{samples} slot of the \code{cfList}.
 \item a factor indicating the grouping (x-axis) for the boxplots.
 }}
 

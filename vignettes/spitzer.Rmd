@@ -161,7 +161,7 @@ cytoBoxplots(cfData, group = "group")
 According to the *Spitzer et al., Cell, 2017* study, an effective therapy lead to an upregulation of MHC-II. This actually can be seen by drawing the median intensity plots for this marker, as shown below together with CD45 and CD4. 
 
 ```{r}
-msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), group='group')
+msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), byGroup='group')
 ```
 
 On this MSI plot, it indeed appears that the MHC-II signal is higher in the Effective therapy day 3 and day 8 compared to the Ineffective therapy day 3 and day 8.  

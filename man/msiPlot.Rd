@@ -4,7 +4,7 @@
 \alias{msiPlot}
 \title{Draw a density (median signal intensity) plot}
 \usage{
-msiPlot(cfList, markers, clusters, group, ...)
+msiPlot(cfList, markers, byGroup = NULL, byCluster = NULL, ...)
 }
 \arguments{
 \item{cfList}{a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'expr' and 'samples' slots.}
@@ -12,11 +12,13 @@ msiPlot(cfList, markers, clusters, group, ...)
 \item{markers}{character vector with column names of the markers to be plotted. A numeric vector
 is also accepted, note that 1 starts after removing columns 'clusterID' and 'sampleID'.}
 
-\item{clusters}{character vector with names of the clusters to be plotted.}
+\item{byGroup}{a character, referring to a column name in the \code{samples} slot of the \code{cfList}. This will
+be used as the grouping for the y-axis.}
 
-\item{group}{a character referring to a column name in the \code{samples} slot of the \code{cfList}.}
+\item{byCluster}{character vector specifying which cluster to be plotted. This will be used as
+the grouping for the y-axis.}
 
-\item{...}{Additional arguments passed on to \code{\link[ggridges]{geom_density_ridges}}}
+\item{...}{Additional arguments passed on to \code{\link[ggridges]{geom_density_ridges}}.}
 }
 \description{
 Function to plot the density (median signal intensity) for given markers.
