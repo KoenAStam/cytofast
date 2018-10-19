@@ -16,6 +16,8 @@
 #' @importFrom stats t.test p.adjust
 #' @importFrom methods is
 #'
+#'
+#' @export
 cytottest <- function(cfList, group, adjustMethod,  ...){
 
 
