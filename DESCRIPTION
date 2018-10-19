@@ -12,6 +12,7 @@ Suggests: BiocStyle, knitr, rmarkdown, FlowSOM
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+biocViews: FlowCytometry, Visualization, Clustering
 RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
