@@ -174,7 +174,7 @@ On this MSI plot, it indeed appears that the MHC-II signal is higher in the Effe
 
 ```{r}
 cfData$samples$effect <- gsub("_D\\d", "", spitzer$group) # difference between effective and ineffective
-cytottest(cfData, group="effect", adjustMethod = "bonferroni")
+cfData <- cytottest(cfData, group="effect", adjustMethod = "bonferroni")
 ```
 
 
