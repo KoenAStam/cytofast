@@ -150,6 +150,8 @@ The function will plot two heatmaps:
 A hierarchical clustering was performed on subset frequencies using the Spearmans rank correlation, resulting in a dendogram displayed on the side of the sample abundancy heatmap. This will group samples sharing similarities.  
 Groups can pre-defined as an input to 'cytoHeatmaps'. 
 
+\clearpage
+
 ## boxplots  
 
 We can also represents the data obtained in a quantitative way by calling the function `cytoBoxplots`. The output of this function represents the proportion of each sample for every cluster.  
@@ -211,5 +213,6 @@ cfData <- cellCounts(cfData) # Update cellCounts with new clusters
 cytoHeatmaps(cfData, group='group', legend=T)
 ```
 
+\clearpage
 
 ## References
