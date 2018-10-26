@@ -17,7 +17,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r style, echo=F, results = "asis"}
+```{r style, echo=FALSE, results = "asis"}
 BiocStyle::markdown()
 ```
 
@@ -67,7 +67,7 @@ To follow this vignette we added some pre-clustered (by Cytosplore) .fcs files t
 
 To import the *.fcs* files created by Cytosplore, we use the function `readCytosploreFCS`. Simply give the directory where you saved your .fcs files and the function will store the data in a `cfList` (cytofast list). It is a S3 object type, so easy to use and can be manipulated like any list in *R*. When not using Cytosplore, check the function `cfList` to create such a list yourself. The main components of a `cfList` are a data frame `expr` containing the expression of the markers for all measured cells, `counts` a data frame with cell counts per cluster per sample and `samples` a data frame with all the meta information.
 
-```{r echo=F}
+```{r echo=FALSE}
 str(cfList(samples = data.frame(),
            expr = data.frame(sampleID=as.factor(1:10), clusterID=letters[1:10]), 
            counts = data.frame()))
@@ -127,7 +127,7 @@ head(cfData$counts)
 In many cases the abundance of the cells could be biased in respect to the sample size of the donors, therefore it could be more logical to look at the frequency of the clusters in respect to the total amount of cells per sample. We will also standardize the data (mean zero, unit variance) to better comapre the clusters.
 
 ```{r}
-cfData <- cellCounts(cfData, frequency = T, scale = T)
+cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
 head(cfData$counts)
 ```
 
@@ -204,7 +204,7 @@ From here it is of course possible to construct a new cfList and go through the 
 ```{r fig.width=10, fig.height=12, fig.cap="\\label{fig:fig3}heatmap based on flowSOM"}
 cfData$expr$clusterID <- clusterID_FS
 cfData <- cellCounts(cfData) # Update cellCounts with new clusters
-cytoHeatmaps(cfData, group='group', legend=T)
+cytoHeatmaps(cfData, group='group', legend=TRUE)
 ```
 
 \clearpage
