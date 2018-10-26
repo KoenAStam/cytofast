@@ -51,15 +51,9 @@ Click on *Run H-SNE* and wait for the map being generated. This step may require
 
 ## Exporting the data
  
-Once the tSNE map is generated, we can save the clusters defined by *Cytosplore* by right-clicking on the tSNE map and save the clusters as **"Save Clusters ..."**" (Figure \ref{fig:fig1}). We can choose the directory of the output files as prompted by *Cytosplore*; make sure to note this location, because we will use this directory to load the .fcs files into R.
+Once the tSNE map is generated, we can save the clusters defined by *Cytosplore* by right-clicking on the tSNE map and save the clusters as **"Save Clusters ..."**". We can choose the directory of the output files as prompted by *Cytosplore*; make sure to note this location, because we will use this directory to load the .fcs files into R.
 
-```{r fig1, fig.align='center', fig.cap="\\label{fig:fig1}Saving clusters in Cytosplore", echo=F}
-knitr::include_graphics("images/cytosplore.png")
-```
-  
 We advise using a simple name (characters only) when renaming the output files, this makes identification and further handling easier. After saving, we will have a folder with the created .fcs files, with each file corresponding to your identified clusters in *Cytosplore*. The next step will be loading the files into R with the help of `cytofast`. 
-
-\clearpage
 
 # Reading the data 
 
