@@ -134,7 +134,7 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
   ## Extract ggplot legend
   g_legend<-function(a.gplot){
     tmp <- ggplot_gtable(ggplot_build(a.gplot))
-    leg <- which(vapply(tmp$grobs, function(x) x$name) == "guide-box")
+    leg <- which(sapply(X = tmp$grobs, FUN = function(x) x$name) == "guide-box")
     legend <- tmp$grobs[[leg]]$grobs[[1]]
     legend
   }
@@ -204,7 +204,6 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
              label=levels(plotDat2$samples),
              gp=gpar(fontsize=7, lineheight=0.75))
   grid.draw(grheat2)
-
   if(!missing(group)){
   seekViewport("heat3")
   grid.draw(grheat3)
