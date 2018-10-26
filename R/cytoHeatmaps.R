@@ -26,7 +26,7 @@
 
 cytoHeatmaps <- function(cfList, group, legend = FALSE){
 
-  if(class(cfList) != "cfList"){
+  if(!is(cfList, "cfList")){
     stop("first argument is not of class \"cfList\"")
   }
   if(length(cfList$expr$clusterID) == 0){
@@ -109,14 +109,14 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
   if(missing(group)){
     plotDat3 <- data.frame(samples=1:nrow(dataHeat2), variable=1, value=factor(0))
   } else {
-    if(class(group) == "character" & length(group) == 1){
+    if(is(group, "character") & length(group) == 1){
       if(group %in% colnames(cfList$samples)){
         grouping <- factor(cfList$samples[,group])
       } else {
         stop("\"group\" is missing as variable from `samples` slot")
       }
     }
-    if(class(group) == "factor" && length(group) == nrow(cfList$counts)){
+    if(is(group, "factor") && length(group) == nrow(cfList$counts)){
       grouping <- group
     }
     plotDat3 <- data.frame(samples=1:nrow(dataHeat2), variable=1, value=factor(grouping)[hc2$order])

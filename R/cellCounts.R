@@ -44,7 +44,7 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
       }
   }
 
-  if(class(frequency) == "logical"){
+  if(is(frequency, "logical")){
     if(frequency == TRUE){
       counts <- apply(counts, 2, "/", rowSums(counts))
     }
