@@ -50,7 +50,7 @@ msiPlot <- function(cfList, markers, byGroup = NULL, byCluster = NULL, ...){
     stop("\"byGroup\" and \"byCluster\" are both specified, choose one")
   }
 
-  X <- cfList$expr[,!colnames(cfList$expr) %in% c("clusterID", "sampleID")][,markers, drop=F]
+  X <- cfList$expr[,!colnames(cfList$expr) %in% c("clusterID", "sampleID")][,markers, drop=FALSE]
   clusterID <- as.factor(cfList$expr$clusterID)
   sampleID <- as.factor(cfList$expr$sampleID)
 
@@ -62,7 +62,7 @@ msiPlot <- function(cfList, markers, byGroup = NULL, byCluster = NULL, ...){
     if(byGroup %in% colnames(cfList$samples)){
       groups <- sampleID
       levels(groups) <- factor(cfList$samples[,byGroup])
-      X <- data.frame(X, groups, check.names=F)
+      X <- data.frame(X, groups, check.names=FALSE)
       legendtitle <- "groups"
     } else {
         stop("\"byGroup\" is a character, but is missing from `samples` slot")

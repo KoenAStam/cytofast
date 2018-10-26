@@ -19,7 +19,7 @@
 
 cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
 
-  if(class(cfList) != "cfList"){
+  if(!is(cfList, "cfList")){
     stop("first argument is not of class \"cfList\"")
   }
   if(length(cfList$expr$clusterID) == 0){
@@ -36,7 +36,7 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
   # Create counts table
   counts <- as.data.frame.matrix(table(sampleID, clusterID))
 
-  if(class(frequency) == "numeric"){
+  if(is(frequency, "numeric")){
     if(length(frequency) == nrow(counts)){
       counts <- apply(counts, 2, "/", frequency)
     } else {
@@ -51,7 +51,7 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
   }
 
   if(scale){
-    counts <- data.frame(scale(counts), check.names=F)
+    counts <- data.frame(scale(counts), check.names=FALSE)
   }
 
   # Add to cfList

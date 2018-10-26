@@ -94,7 +94,7 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
   plotDat2$variable <- factor(plotDat2$variable, levels=levels(plotDat2$variable)[hc1$order])
 
   ggheat2 <- ggplot(plotDat2, aes_string(y="samples", x="variable", fill="value")) +
-            geom_tile(colour='black', show.legend=T) +
+            geom_tile(colour='black', show.legend=TRUE) +
             theme_grey(base_size=9) +
             labs(x="", y="") +
             scale_fill_gradientn(colours=colorRampPalette(rev(brewer.pal(n = 11, name ="PRGn")))(100)) +
@@ -123,7 +123,7 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
   }
 
   ggheat3 <- ggplot(plotDat3, aes_string(y="samples", x="variable", fill="value")) +
-            geom_tile(colour="black", show.legend=T) +
+            geom_tile(colour="black", show.legend=TRUE) +
             scale_fill_discrete() +
             scale_x_discrete(expand=c(0,0)) +
             scale_y_discrete(expand=c(0,0), position="left") +

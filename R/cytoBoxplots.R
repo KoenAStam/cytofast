@@ -39,7 +39,7 @@ cytoBoxplots <- function(cfList, group, stat){
     grouping <- group
   }
 
-  plotData <- reshape2::melt(cbind(grouping, data.frame(cfList$counts, check.names=F)), id.vars=1)
+  plotData <- reshape2::melt(cbind(grouping, data.frame(cfList$counts, check.names=FALSE)), id.vars=1)
   plotData$variable <- factor(plotData$variable, levels=levels(plotData$variable))
 
   g1 <- ggplot(plotData, aes_string(x="grouping", y="value", color="grouping"))
