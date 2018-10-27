@@ -15,6 +15,15 @@
 #'
 #' @importFrom stats median
 #'
+#' @examples
+#' # Read Data
+#' dirFCS <- system.file("extdata", package="cytofast")
+#' cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
+#'
+#' # Add cell counts to cfList
+#' cfData <- cellCounts(cfData)
+#'
+#'
 #' @export
 
 cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
