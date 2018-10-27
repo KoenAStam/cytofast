@@ -6,7 +6,7 @@ Authors@R: c(person("K.A.", "Stam", email = "k.a.stam@hotmail.com", role = c("au
 Maintainer: K.A. Stam <k.a.stam@hotmail.com>
 Description: Cytofast can be used to visualize and explore CyTOF data.
 Depends: R (>= 3.5.0)
-Imports: flowCore, ggplot2, ggridges, RColorBrewer, reshape2, stats, grDevices, Rdpack, methods
+Imports: flowCore, ggplot2, ggridges, RColorBrewer, reshape2, stats, grDevices, Rdpack, methods, grid
 RdMacros: Rdpack
 Suggests: BiocStyle, knitr, rmarkdown, FlowSOM
 License: GPL-3
