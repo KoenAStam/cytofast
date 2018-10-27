@@ -17,6 +17,10 @@
 #'
 #' @importFrom flowCore read.FCS
 #'
+#' @examples
+#' dirFCS <- system.file("extdata", package="cytofast")
+#' cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
+#'
 #' @export
 
 readCytosploreFCS <- function(dir=NULL, colNames = c("names", "description")){
