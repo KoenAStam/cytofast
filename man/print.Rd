@@ -14,3 +14,11 @@
 \description{
 Print method for cfList
 }
+\examples{
+# Create empty cfList
+cfData <- cfList()
+
+# Print will return the str() of an cfList
+cfData
+
+}

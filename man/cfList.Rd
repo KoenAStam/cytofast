@@ -19,6 +19,12 @@ The function returns an object of class \code{cfList}.
 \description{
 Creates a \code{cfList} S3 object.
 }
+\examples{
+# Create empty cfList
+cfData <- cfList()
+
+
+}
 \keyword{cf}
 \keyword{cytofast,}
 \keyword{list,}
