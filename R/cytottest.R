@@ -46,7 +46,7 @@ cytottest <- function(cfList, group, adjustMethod,  ...){
   for(i in seq_len(ncol(X))){
      test <- t.test(X[,i] ~ grouping, ...)
      results[i, 3] <- test$p.value
-     results[i, 1:2] <- test$estimate
+     results[i, seq_len(2)] <- test$estimate
   }
 
   colnames(results) <- c(paste("mean", levels(grouping)[1], sep="_"),

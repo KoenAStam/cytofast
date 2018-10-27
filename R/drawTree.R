@@ -20,13 +20,13 @@ drawTree <- function(hclust){
   order <- hclust$order
 
   # set-up ggplot
-  dummy <- data.frame(x=factor(1:max(order)), y=seq(0, max(hclust$height), length.out=max(order)))
+  dummy <- data.frame(x=factor(seq_len(max(order))), y=seq(0, max(hclust$height), length.out=max(order)))
   g1 <- ggplot(dummy) + geom_blank(aes_string(x="x", y="y")) + theme_void()
 
-  for(i in 1:nrow(tree)){
+  for(i in seq_len(nrow(tree))){
 
     # Set coordinates
-    xCoord <- match(abs(tree[i, 1:2]), order)
+    xCoord <- match(abs(tree[i, seq_len(2)]), order)
     yCoordLeft <- c(tree$height[i], 0)
     yCoordRight <- c(tree$height[i], 0)
 

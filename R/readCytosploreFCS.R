@@ -46,7 +46,7 @@ readCytosploreFCS <- function(dir=NULL, colNames = c("names", "description")){
 
   # Loop through files and read into R environment
   x <- data.frame()
-  for(i in 1:length(FCSFilePaths)){
+  for(i in seq_along(FCSFilePaths)){
     cat(paste("Reading .FCS cluster:",i,"\n"))
 
     FCSfile <- flowCore::read.FCS(FCSFilePaths[i],

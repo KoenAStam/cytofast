@@ -48,7 +48,7 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
 
   # extract median intenstity per cluster
   dataMed <- data.frame(matrix(0, ncol=ncol(X), nrow=length(levels(clusterID))))
-  for(i in 1:ncol(X)){
+  for(i in seq_len(ncol(X))){
     dataMed[,i] <- tapply(X[,i], clusterID, median)
   }
   colnames(dataMed) <- colnames(X)
@@ -107,7 +107,7 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
 
   ## heatmap 3 - (group plotting)
   if(missing(group)){
-    plotDat3 <- data.frame(samples=1:nrow(dataHeat2), variable=1, value=factor(0))
+    plotDat3 <- data.frame(samples=seq_len(nrow(dataHeat2)), variable=1, value=factor(0))
   } else {
     if(is(group, "character") & length(group) == 1){
       if(group %in% colnames(cfList$samples)){
@@ -119,7 +119,7 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
     if(is(group, "factor") && length(group) == nrow(cfList$counts)){
       grouping <- group
     }
-    plotDat3 <- data.frame(samples=1:nrow(dataHeat2), variable=1, value=factor(grouping)[hc2$order])
+    plotDat3 <- data.frame(samples=seq_len(nrow(dataHeat2)), variable=1, value=factor(grouping)[hc2$order])
   }
 
   ggheat3 <- ggplot(plotDat3, aes_string(y="samples", x="variable", fill="value")) +
