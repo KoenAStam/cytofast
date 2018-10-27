@@ -1,6 +1,6 @@
 Package: cytofast
 Title: cytofast - A quick visualization and analysis tool for CyTOF data
-Version: 0.99.3
+Version: 0.99.4
 Authors@R: c(person("K.A.", "Stam", email = "k.a.stam@lumc.nl", role = c("aut", "cre")),
 	           person("G.", "Beyrend", email = "G.Beyrend@lumc.nl", role = "aut"))
 Maintainer: K.A. Stam <k.a.stam@lumc.nl>

@@ -23,6 +23,11 @@ This function reads and combines .FCS files created specifcally by Cytosplore.
 This function is a wrapper around \code{\link[flowCore]{read.FCS}}. For more
 flexibility see their help page.
 }
+\examples{
+dirFCS <- system.file("extdata", package="cytofast")
+cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
+
+}
 \keyword{FCS,}
 \keyword{cytosplore}
 \keyword{data,}

@@ -23,6 +23,16 @@ default \code{\link[base]{scale}} function is called.}
 A function to add the frequency (or abundance) of cell clusters per sample to a
 \code{cfList}.
 }
+\examples{
+# Read Data
+dirFCS <- system.file("extdata", package="cytofast")
+cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
+
+# Add cell counts to cfList
+cfData <- cellCounts(cfData)
+
+
+}
 \keyword{cells}
 \keyword{counts,}
 \keyword{frequency,}
