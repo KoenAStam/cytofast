@@ -12,7 +12,26 @@
 #' `c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none")`. If omitted, no correction takes place.
 #' @param ... further arguments passed on to \code{\link[stats]{t.test}}.
 #'
+#' @return Returns a cfList with a 'results' slot.
+#' 
+#' @examples 
+#' # Read Data
+#' dirFCS <- system.file("extdata", package="cytofast")
+#' cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
+#' 
+#' # relabeling of clusterID
+#' levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
 #'
+#' # Add cell counts to cfList and add meta data
+#' cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
+#' meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
+#' cfData$samples <- cbind(cfData$samples, meta)
+#' 
+#' # Run t-test
+#' cfData$samples$effect <- gsub("_D\\d", "", spitzer$group)
+#' cfData <- cytottest(cfData, group  = "effect", adjustMethod = "bonferroni")
+#' cfData$results
+#' 
 #' @importFrom stats t.test p.adjust
 #' @importFrom methods is
 #'

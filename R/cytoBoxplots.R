@@ -9,6 +9,8 @@
 #' * a factor indicating the grouping (x-axis) for the boxplots.
 #' @param stat ignore, will be implemented soon.
 #'
+#' @return None
+#'
 #' @keywords boxplot,
 #'
 #' @import ggplot2
@@ -30,7 +32,7 @@
 #' cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
 #' 
 #' # Draw boxplots
-#' cytoBoxplot(cfData, group="group")
+#' cytoBoxplots(cfData, group="group")
 #' 
 #'
 #' @export

@@ -9,8 +9,16 @@ drawTree(hclust)
 \arguments{
 \item{hclust}{an object of class \code{\link[stats]{hclust}}.}
 }
+\value{
+None
+}
 \description{
-Function to draw a dendrogram with ggplot, the tree can be easily alligned to other graphs (e.g. heatmaps).
+Function to draw only a dendrogram with ggplot, the tree can be easily alligned to other graphs (e.g. heatmaps).
+}
+\examples{
+hc <- hclust(dist(data.frame(x1 = rnorm(10), x2 = rnorm(10), x3 = rnorm(10))))
+drawTree(hc)
+
 }
 \keyword{dendrogram}
 \keyword{heatmap}

@@ -11,6 +11,9 @@
 
 \item{...}{further arguments passed to or from other methods}
 }
+\value{
+None, but prints the str() of an cfList.
+}
 \description{
 Print method for cfList
 }

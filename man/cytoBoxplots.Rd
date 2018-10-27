@@ -17,6 +17,9 @@ cytoBoxplots(cfList, group, stat)
 
 \item{stat}{ignore, will be implemented soon.}
 }
+\value{
+None
+}
 \description{
 Draw boxplots for all given clusters. Values are based on the \code{counts} slot in the
 \code{cfList}.
@@ -35,7 +38,7 @@ cfData$samples <- cbind(cfData$samples, meta)
 cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
 
 # Draw boxplots
-cytoBoxplot(cfData, group="group")
+cytoBoxplots(cfData, group="group")
 
 
 }

@@ -13,6 +13,8 @@
 #' * a factor indicating the grouping (x-axis) for the boxplots.
 #' @param legend logical, whether a legend should be added
 #'
+#' @return None
+#'
 #' @keywords heatmap, markers, FCS
 #'
 #' @import ggplot2

@@ -13,7 +13,7 @@
 #' @importFrom Rdpack reprompt
 #'
 #' @examples 
-#' # Create empty cfList
+#' # Create an empty cfList
 #' cfData <- cfList()
 #' 
 #'
@@ -35,6 +35,8 @@ cfList <- function(samples=NULL, expr=NULL, counts=NULL){
 #'
 #' @param x a cfList object
 #' @param ... further arguments passed to or from other methods
+#'
+#' @return None, but prints the str() of an cfList.
 #'
 #' @importFrom utils str
 #'

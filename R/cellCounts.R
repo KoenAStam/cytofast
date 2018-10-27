@@ -11,6 +11,8 @@
 #' @param scale a logical value. Do the cell frequencies need to be centered and scaled? The
 #' default \code{\link[base]{scale}} function is called.
 #'
+#' @return Returns a cfList with a 'counts' slot.
+#'
 #' @keywords counts, frequency, cells
 #'
 #' @importFrom stats median

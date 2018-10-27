@@ -20,6 +20,9 @@ the grouping for the y-axis.}
 
 \item{...}{Additional arguments passed on to \code{\link[ggridges]{geom_density_ridges}}.}
 }
+\value{
+None
+}
 \description{
 Function to plot the density (median signal intensity) for given markers.
 }
@@ -28,6 +31,9 @@ Function to plot the density (median signal intensity) for given markers.
 dirFCS <- system.file("extdata", package="cytofast")
 cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 
+#' # relabeling of clusterID
+levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
+
 # Add cell counts to cfList and add meta data
 cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
 meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
@@ -35,9 +41,6 @@ cfData$samples <- cbind(cfData$samples, meta)
 
 # Remove unnecessary markers
 cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
-
-# relabeling of clusterID
-levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
 
 # Draw median signal intensity plot, by group
 msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), byGroup = 'group')

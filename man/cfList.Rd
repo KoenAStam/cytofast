@@ -20,7 +20,7 @@ The function returns an object of class \code{cfList}.
 Creates a \code{cfList} S3 object.
 }
 \examples{
-# Create empty cfList
+# Create an empty cfList
 cfData <- cfList()
 
 

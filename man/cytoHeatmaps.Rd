@@ -17,6 +17,9 @@ cytoHeatmaps(cfList, group, legend = FALSE)
 
 \item{legend}{logical, whether a legend should be added}
 }
+\value{
+None
+}
 \description{
 Function to draw two heatmaps. They visualize the median intensity of the markers for the
 created clusters. The ordering of the clusters is based on the default
