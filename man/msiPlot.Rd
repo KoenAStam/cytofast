@@ -39,10 +39,10 @@ cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
 # relabeling of clusterID
 levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
 
-# Draw median signal intensity plot (by group)
+# Draw median signal intensity plot, by group
 msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), byGroup = 'group')
 
-# Or by marker
+# Or by cluster
 msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), byCluster = c("1", "6", "10"))
 
 
