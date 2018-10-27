@@ -60,11 +60,11 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
 
   # prepare plotdata
   plotDat <- reshape2::melt(data.frame(markers=factor(rownames(dataHeat), levels=rev(rownames(dataHeat))),
-                             dataHeat, check.names=F), id.vars="markers")
+                             dataHeat, check.names=FALSE), id.vars="markers")
   plotDat$variable <- factor(plotDat$variable, levels=levels(plotDat$variable)[hc1$order])
 
   ggheat1  <- ggplot(plotDat, aes_string(y="markers", x="variable", fill="value")) +
-              geom_tile(colour='black', show.legend=T) +
+              geom_tile(colour='black', show.legend=TRUE) +
               theme_grey(base_size=9) +
               labs(x="", y="") +
               scale_fill_gradientn(colours=colorRampPalette(rev(brewer.pal(n = 11, name ="RdYlBu")))(100)) +
@@ -90,7 +90,7 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
 
   # prepare plotdata2
   plotDat2 <- reshape2::melt(data.frame(samples=factor(rownames(dataHeat2), levels=rownames(dataHeat2)[hc2$order]),
-                             dataHeat2, check.names=F), id.vars="samples")
+                             dataHeat2, check.names=FALSE), id.vars="samples")
   plotDat2$variable <- factor(plotDat2$variable, levels=levels(plotDat2$variable)[hc1$order])
 
   ggheat2 <- ggplot(plotDat2, aes_string(y="samples", x="variable", fill="value")) +
