@@ -1,9 +1,9 @@
 Package: cytofast
 Title: cytofast - A quick visualization and analysis tool for CyTOF data
 Version: 0.99.4
-Authors@R: c(person("K.A.", "Stam", email = "k.a.stam@lumc.nl", role = c("aut", "cre")),
+Authors@R: c(person("K.A.", "Stam", email = "k.a.stam@hotmail.com", role = c("aut", "cre")),
 	           person("G.", "Beyrend", email = "G.Beyrend@lumc.nl", role = "aut"))
-Maintainer: K.A. Stam <k.a.stam@lumc.nl>
+Maintainer: K.A. Stam <k.a.stam@hotmail.com>
 Description: Cytofast can be used to visualize and explore CyTOF data.
 Depends: R (>= 3.5.0)
 Imports: flowCore, ggplot2, ggridges, RColorBrewer, reshape2, stats, grDevices, Rdpack, methods
