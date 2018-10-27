@@ -35,7 +35,7 @@
 #' # Remove unnecessary markers
 #' cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
 #' 
-#' # Plot heatmaps
+#' # Draw heatmaps
 #' cytoHeatmaps(cfData, group = "group", legend = TRUE)
 #'
 #' @export
