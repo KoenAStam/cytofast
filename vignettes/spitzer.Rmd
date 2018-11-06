@@ -9,7 +9,7 @@ author:
 package: cytofast
 date: '`r Sys.Date()`'
 output:
-  BiocStyle::pdf_document
+  BiocStyle::html_document
 bibliography: REFERENCES.bib
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -67,7 +67,7 @@ To follow this vignette we added some pre-clustered (by Cytosplore) .fcs files t
 
 To import the *.fcs* files created by Cytosplore, we use the function `readCytosploreFCS`. Simply give the directory where you saved your .fcs files and the function will store the data in a `cfList` (cytofast list). It is a S3 object type, so easy to use and can be manipulated like any list in *R*. When not using Cytosplore, check the function `cfList` to create such a list yourself. The main components of a `cfList` are a data frame `expr` containing the expression of the markers for all measured cells, `counts` a data frame with cell counts per cluster per sample and `samples` a data frame with all the meta information.
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=F}
 str(cfList(samples = data.frame(),
            expr = data.frame(sampleID=as.factor(1:10), clusterID=letters[1:10]), 
            counts = data.frame()))
@@ -77,14 +77,14 @@ Note that the `expr` slot needs both a column named "sampleID" and "clusterID", 
 
 From here you can choose to use your own data, or it's possible to follow along with the added data from Spitzer. So, let's load the data into R:
 
-```{r}
+```{r, eval=F}
 dirFCS <- system.file("extdata", package="cytofast")
 cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 ```
 
 In total there were 10 .fcs files (also meaning 10 clusters) and are now stored into a `cfList`. We can acces the list and have a quick look at the marker expression of the cells.
 
-```{r}
+```{r, eval=F}
 cfData$expr[1:5, 1:5]
 ```
 
@@ -94,13 +94,13 @@ As shown, both clusterID and sampleID are added to the expression data. We also 
 
 Some channels are not needed (e.g. DNA1, DNA2, barcoding, etc...). We can remove those and only keep the markers that we are actually intrested in. 
 
-```{r}
+```{r, eval=F}
 cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
 ```
 
 Next we will add some meta data to the `cfList`. Make sure that the sampleID corresponds with the sampleID of the meta data! When using Cytosplore, the sampleID is based on the sample tag (CSPLR_ST). 
 
-```{r}
+```{r, eval=F}
 data(spitzer) 
 meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),] # match sampleID
 cfData$samples <- cbind(cfData$samples, meta)
@@ -108,7 +108,7 @@ cfData$samples <- cbind(cfData$samples, meta)
 
 Lastly, we will make some small changes to the labeling of the data. This helps with the visualization of the heatmaps and discovering relations of clusters.
 
-```{r}
+```{r, eval=F}
 levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
 levels(cfData$expr$sampleID) <- cfData$samples$sample_name
 ```
@@ -119,14 +119,14 @@ levels(cfData$expr$sampleID) <- cfData$samples$sample_name
 
 Before we can create the heatmaps, we first address the last slot `counts`, which is still empty. To fill this slot we can call the function `cellCounts`. The default function will simply add the raw cell counts per cluster per sample into the cfList. 
 
-```{r}
+```{r, eval=F}
 cfData <- cellCounts(cfData)
 head(cfData$counts)
 ```
 
 In many cases the abundance of the cells could be biased in respect to the sample size of the donors, therefore it could be more logical to look at the frequency of the clusters in respect to the total amount of cells per sample. We will also standardize the data (mean zero, unit variance) to better comapre the clusters.
 
-```{r}
+```{r, eval=F}
 cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
 head(cfData$counts)
 ```
@@ -134,7 +134,7 @@ head(cfData$counts)
 Now everything is ready to visualize the data. One of the main functions of this package is `cytoHeatmaps`, which is used to visualize both the phenotype of the created clusters and their heterogeneity in respect to the samples.
 
 ```{r fig.width=10, fig.height=12, fig.cap="\\label{fig:fig2}Cytofast heatmap"}
-cytoHeatmaps(cfData, group="group", legend=TRUE)
+# cytoHeatmaps(cfData, group="group", legend=TRUE)
 ```
 
 The function will plot two heatmaps:
@@ -150,7 +150,7 @@ Groups can pre-defined as an input to 'cytoHeatmaps'.
 
 We can also represents the data obtained in a quantitative way by calling the function `cytoBoxplots`. The output of this function represents the proportion of each sample for every cluster.  
 
-```{r}
+```{r, eval=F}
 cytoBoxplots(cfData, group = "group")
 ```
 
@@ -158,7 +158,7 @@ cytoBoxplots(cfData, group = "group")
 
 According to the *Spitzer et al., Cell, 2017* study, an effective therapy lead to an upregulation of MHC-II. This actually can be seen by drawing the median intensity plots for this marker, as shown below together with CD45 and CD4. 
 
-```{r}
+```{r, eval=F}
 msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), byGroup='group')
 ```
 
@@ -168,7 +168,7 @@ On this MSI plot, it indeed appears that the MHC-II signal is higher in the Effe
 
 ## t.test
 
-```{r}
+```{r, eval=F}
 cfData$samples$effect <- gsub("_D\\d", "", spitzer$group) # difference between effective and ineffective
 cfData <- cytottest(cfData, group="effect", adjustMethod = "bonferroni")
 ```
@@ -182,7 +182,7 @@ cfData <- cytottest(cfData, group="effect", adjustMethod = "bonferroni")
 
 It is also possible to use other clustering algorithms 
 
-```{r}
+```{r, eval=F}
 library(FlowSOM)
 fSOM <- FlowSOM(input = dirFCS, 
                 transform = FALSE,
@@ -194,14 +194,14 @@ fSOM <- FlowSOM(input = dirFCS,
 
 From the flowSOM object we can extract the mapping and relevel each individual cell to its meta cluster. 
 
-```{r}
+```{r, eval=F}
 clusterID_FS <- as.factor(fSOM$FlowSOM$map$mapping[,1])
 levels(clusterID_FS) <- fSOM$metaclustering
 ```
 
 From here it is of course possible to construct a new cfList and go through the whole workflow, but as simplification we just swap `clusterID` with `clusterID_FS` and only show the heatmap.
 
-```{r fig.width=10, fig.height=12, fig.cap="\\label{fig:fig3}heatmap based on flowSOM"}
+```{r fig.width=10, fig.height=12, fig.cap="\\label{fig:fig3}heatmap based on flowSOM", eval=F}
 cfData$expr$clusterID <- clusterID_FS
 cfData <- cellCounts(cfData) # Update cellCounts with new clusters
 cytoHeatmaps(cfData, group='group', legend=TRUE)

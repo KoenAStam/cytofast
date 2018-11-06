@@ -1,40 +1,32 @@
-#' Constructor for a cfList
+#' The S4 class cfList
 #'
-#' @description Creates a \code{cfList} S3 object.
-#'
-#' @param expr data frame containing the marker expression
-#' @param counts data frame containing (normalized) cell counts per cluster and per sample
-#' @param samples data frame containing information on each sample
+#' @description Creates a cfList S4 object.
+#' 
+#' @slot samples data frame containing information on each sample
+#' @slot expr data frame containing the marker expression
+#' @slot counts data frame containing (normalized) cell counts per cluster and per sample
+#' @slot results data frame containing results 
 #'
 #' @return The function returns an object of class \code{cfList}.
 #'
 #' @keywords cytofast, list, cf
 #'
+#' @import methods
 #' @importFrom Rdpack reprompt
 #'
 #' @examples 
 #' # Create an empty cfList
-#' cfData <- cfList()
+#' cfData <- new("cfList")
 #' 
-#'
 #' @export
-cfList <- function(samples=NULL, expr=NULL, counts=NULL){
+cfList <- setClass("cfList", slots = c(samples = "data.frame", 
+                                       expr = "data.frame", 
+                                       counts = "data.frame",
+                                       results = "data.frame"))
 
-  x <- list(samples = samples, expr = expr, counts = counts)
-  class(x) <- "cfList"
-
-  #if(missing(counts)){
-    # cat("agrument \"counts\" is missing, using default `cellCounts`")
-  #  x <- cellCounts(x)
-  #}
-
-  x
-}
-
-#' Print method for cfList
+#' show method for cfList
 #'
-#' @param x a cfList object
-#' @param ... further arguments passed to or from other methods
+#' @param object a cfList object
 #'
 #' @return None, but prints the str() of an cfList.
 #'
@@ -44,12 +36,15 @@ cfList <- function(samples=NULL, expr=NULL, counts=NULL){
 #' # Create empty cfList
 #' cfData <- cfList()
 #' 
-#' # Print will return the str() of an cfList
+#' # show will return the str() of an cfList
 #' cfData
 #'
-#' @rdname print
+#' @rdname show
 #' @export
-print.cfList = function(x, ...) {
-  print(str(x), ...)
-}
+setMethod("show", "cfList", function(object){
+  show(str(object))
+  }
+)
+
+
 
