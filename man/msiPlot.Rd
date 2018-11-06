@@ -7,7 +7,7 @@
 msiPlot(cfList, markers, byGroup = NULL, byCluster = NULL, ...)
 }
 \arguments{
-\item{cfList}{a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'expr' and 'samples' slots.}
+\item{cfList}{a cfList object. It should contain at least data in the 'expr' and 'samples' slots.}
 
 \item{markers}{character vector with column names of the markers to be plotted. A numeric vector
 is also accepted, note that 1 starts after removing columns 'clusterID' and 'sampleID'.}

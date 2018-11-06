@@ -3,7 +3,7 @@
 #' @description
 #' Function to plot the density (median signal intensity) for given markers.
 #'
-#' @param cfList a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'expr' and 'samples' slots.
+#' @param cfList a cfList object. It should contain at least data in the 'expr' and 'samples' slots.
 #' @param markers character vector with column names of the markers to be plotted. A numeric vector
 #' is also accepted, note that 1 starts after removing columns 'clusterID' and 'sampleID'.
 #' @param byGroup a character, referring to a column name in the `samples` slot of the `cfList`. This will

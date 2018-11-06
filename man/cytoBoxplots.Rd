@@ -7,7 +7,7 @@
 cytoBoxplots(cfList, group, stat)
 }
 \arguments{
-\item{cfList}{a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'counts' slot.}
+\item{cfList}{a cfList object. It should contain at least data in the 'counts' slot.}
 
 \item{group}{one of:
 \itemize{

@@ -3,7 +3,7 @@
 #' @description Draw boxplots for all given clusters. Values are based on the `counts` slot in the
 #' `cfList`.
 #'
-#' @param cfList a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'counts' slot.
+#' @param cfList a cfList object. It should contain at least data in the 'counts' slot.
 #' @param group one of:
 #' * a character referring to a column name in the `samples` slot of the `cfList`.
 #' * a factor indicating the grouping (x-axis) for the boxplots.

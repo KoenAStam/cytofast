@@ -3,7 +3,7 @@
 #' @description A function to add the frequency (or abundance) of cell clusters per sample to a
 #'`cfList`.
 #'
-#' @param cfList a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'expr' slot.
+#' @param cfList a cfList object. It should contain at least data in the 'expr' slot.
 #' @param frequency one of:
 #' * a logical value. if `FALSE`, the abundance of the cell counts are used. If
 #' `TRUE`, the frequency of the total amount of given cells is used.

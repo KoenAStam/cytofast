@@ -7,7 +7,7 @@
 cytoHeatmaps(cfList, group, legend = FALSE)
 }
 \arguments{
-\item{cfList}{a \code{\link[cytofast]{cfList}} object.}
+\item{cfList}{a cfList object.}
 
 \item{group}{one of:
 \itemize{

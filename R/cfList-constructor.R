@@ -1,24 +1,13 @@
 #' The S4 class cfList
 #'
-#' @description Creates a cfList S4 object.
+#' @description The cfList S4 object.
+#' 
+#' @import methods
 #' 
 #' @slot samples data frame containing information on each sample
 #' @slot expr data frame containing the marker expression
 #' @slot counts data frame containing (normalized) cell counts per cluster and per sample
 #' @slot results data frame containing results 
-#'
-#' @return The function returns an object of class \code{cfList}.
-#'
-#' @keywords cytofast, list, cf
-#'
-#' @import methods
-#' @importFrom Rdpack reprompt
-#'
-#' @examples 
-#' # Create an empty cfList
-#' cfData <- new("cfList")
-#' 
-#' @export
 cfList <- setClass("cfList", slots = c(samples = "data.frame", 
                                        expr = "data.frame", 
                                        counts = "data.frame",

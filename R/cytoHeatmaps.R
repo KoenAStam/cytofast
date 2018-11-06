@@ -7,7 +7,7 @@
 #' the median intensity is calculated per cluster, thus placing the most similar clusters
 #' next to each other.
 #'
-#' @param cfList a \code{\link[cytofast]{cfList}} object.
+#' @param cfList a cfList object.
 #' @param group one of:
 #' * a character vector referring to a column name in the `samples` slot of the `cfList`.
 #' * a factor indicating the grouping (x-axis) for the boxplots.

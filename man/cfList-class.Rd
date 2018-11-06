@@ -5,11 +5,8 @@
 \alias{cfList-class}
 \alias{cfList}
 \title{The S4 class cfList}
-\value{
-The function returns an object of class \code{cfList}.
-}
 \description{
-Creates a \code{cfList} S4 object.
+The cfList S4 object.
 }
 \section{Slots}{
 
@@ -23,11 +20,3 @@ Creates a \code{cfList} S4 object.
 \item{\code{results}}{data frame containing results}
 }}
 
-\examples{
-# Create an empty cfList
-cfData <- new("cfList")
-
-}
-\keyword{cf}
-\keyword{cytofast,}
-\keyword{list,}

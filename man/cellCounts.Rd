@@ -7,7 +7,7 @@
 cellCounts(cfList, frequency = FALSE, scale = FALSE)
 }
 \arguments{
-\item{cfList}{a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'expr' slot.}
+\item{cfList}{a cfList object. It should contain at least data in the 'expr' slot.}
 
 \item{frequency}{one of:
 \itemize{

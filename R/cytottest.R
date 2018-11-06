@@ -4,7 +4,7 @@
 #' @description Performs a separate t-test on each cluster within a cfList. The output is added and can also be used
 #' by other functions
 #'
-#' @param cfList a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'counts' slot.
+#' @param cfList a cfList object. It should contain at least data in the 'counts' slot.
 #' @param group one of:
 #' * a character vector referring to a column name in the `samples` slot of the `cfList`.
 #' * a factor indicating the grouping for the t.test.
