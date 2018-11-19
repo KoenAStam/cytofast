@@ -150,7 +150,7 @@ Groups can pre-defined as an input to 'cytoHeatmaps'.
 
 We can also represents the data obtained in a quantitative way by calling the function `cytoBoxplots`. The output of this function represents the proportion of each sample for every cluster.  
 
-```{r, eval=F}
+```{r, eval=T}
 cytoBoxplots(cfData, group = "group")
 ```
 
@@ -158,7 +158,7 @@ cytoBoxplots(cfData, group = "group")
 
 According to the *Spitzer et al., Cell, 2017* study, an effective therapy lead to an upregulation of MHC-II. This actually can be seen by drawing the median intensity plots for this marker, as shown below together with CD45 and CD4. 
 
-```{r, eval=F}
+```{r, eval=T}
 msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), byGroup='group')
 ```
 
@@ -169,7 +169,7 @@ On this MSI plot, it indeed appears that the MHC-II signal is higher in the Effe
 ## t.test
 
 ```{r, eval=F}
-cfData$samples$effect <- gsub("_D\\d", "", spitzer$group) # difference between effective and ineffective
+cfData@samples$effect <- gsub("_D\\d", "", spitzer$group) # difference between effective and ineffective
 cfData <- cytottest(cfData, group="effect", adjustMethod = "bonferroni")
 ```
 
@@ -202,7 +202,7 @@ levels(clusterID_FS) <- fSOM$metaclustering
 From here it is of course possible to construct a new cfList and go through the whole workflow, but as simplification we just swap `clusterID` with `clusterID_FS` and only show the heatmap.
 
 ```{r fig.width=10, fig.height=12, fig.cap="\\label{fig:fig3}heatmap based on flowSOM", eval=F}
-cfData$expr$clusterID <- clusterID_FS
+cfData@expr$clusterID <- clusterID_FS
 cfData <- cellCounts(cfData) # Update cellCounts with new clusters
 cytoHeatmaps(cfData, group='group', legend=TRUE)
 ```
