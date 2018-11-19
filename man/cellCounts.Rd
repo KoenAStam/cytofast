@@ -9,7 +9,7 @@ cellCounts(cfList, frequency = FALSE, scale = FALSE)
 \arguments{
 \item{cfList}{a cfList object. It should contain at least data in the 'expr' slot.}
 
-\item{frequency}{one of:
+\item{frequency}{one of
 \itemize{
 \item a logical value. if \code{FALSE}, the abundance of the cell counts are used. If
 \code{TRUE}, the frequency of the total amount of given cells is used.

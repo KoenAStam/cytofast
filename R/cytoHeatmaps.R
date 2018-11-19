@@ -31,32 +31,31 @@
 #'
 #' # Add cell counts to cfList and add meta data
 #' cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
-#' meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
-#' cfData$samples <- cbind(cfData$samples, meta)
+#' meta <- spitzer[match(row.names(cfData@samples), spitzer[,"CSPLR_ST"]),]
+#' cfData@samples <- cbind(cfData@samples, meta)
 #' 
 #' # Remove unnecessary markers
-#' cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
+#' cfData@expr <- cfData@expr[,-c(3:10, 13:16, 55:59, 61:63)]
 #' 
 #' # Draw heatmaps
 #' cytoHeatmaps(cfData, group = "group", legend = TRUE)
 #'
 #' @export
-
 cytoHeatmaps <- function(cfList, group, legend = FALSE){
 
   if(!is(cfList, "cfList")){
     stop("first argument is not of class \"cfList\"")
   }
-  if(length(cfList$expr$clusterID) == 0){
+  if(length(cfList@expr$clusterID) == 0){
     stop("clusterID is missing from `expr` slot")
   }
-  if(length(cfList$expr$clusterID) == 0){
+  if(length(cfList@expr$clusterID) == 0){
     stop("sampleID is missing from `expr` slot")
   }
 
-  X <- cfList$expr[,!colnames(cfList$expr) %in% c("clusterID", "sampleID")]
-  clusterID <- factor(cfList$expr$clusterID)
-  sampleID <- factor(cfList$expr$sampleID)
+  X <- cfList@expr[,!colnames(cfList@expr) %in% c("clusterID", "sampleID")]
+  clusterID <- factor(cfList@expr$clusterID)
+  sampleID <- factor(cfList@expr$sampleID)
 
   if(all(unlist(lapply(X, is.numeric))) == FALSE){
     stop("Not all markers are numeric")
@@ -96,11 +95,11 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
 
   # extract cell counts per sample
 
-  if(length(cfList$counts) == 0){
+  if(length(cfList@counts) == 0){
   warning("`counts` slot is missing from cfList, using default")
-  dataHeat2 <- cellCounts(cfList)$counts
+  dataHeat2 <- cellCounts(cfList)@counts
   } else {
-    dataHeat2 <- cfList$counts
+    dataHeat2 <- cfList@counts
   }
 
   # hclust on cell counts of samples
@@ -128,13 +127,13 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
     plotDat3 <- data.frame(samples=seq_len(nrow(dataHeat2)), variable=1, value=factor(0))
   } else {
     if(is(group, "character") & length(group) == 1){
-      if(group %in% colnames(cfList$samples)){
-        grouping <- factor(cfList$samples[,group])
+      if(group %in% colnames(cfList@samples)){
+        grouping <- factor(cfList@samples[,group])
       } else {
         stop("\"group\" is missing as variable from `samples` slot")
       }
     }
-    if(is(group, "factor") && length(group) == nrow(cfList$counts)){
+    if(is(group, "factor") && length(group) == nrow(cfList@counts)){
       grouping <- group
     }
     plotDat3 <- data.frame(samples=seq_len(nrow(dataHeat2)), variable=1, value=factor(grouping)[hc2$order])

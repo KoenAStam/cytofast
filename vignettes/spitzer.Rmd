@@ -77,15 +77,15 @@ Note that the `expr` slot needs both a column named "sampleID" and "clusterID", 
 
 From here you can choose to use your own data, or it's possible to follow along with the added data from Spitzer. So, let's load the data into R:
 
-```{r, eval=F}
+```{r, eval=T}
 dirFCS <- system.file("extdata", package="cytofast")
 cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 ```
 
 In total there were 10 .fcs files (also meaning 10 clusters) and are now stored into a `cfList`. We can acces the list and have a quick look at the marker expression of the cells.
 
-```{r, eval=F}
-cfData$expr[1:5, 1:5]
+```{r, eval=T}
+cfData@expr[1:5, 1:5]
 ```
 
 As shown, both clusterID and sampleID are added to the expression data. We also see that there are some 'markers' that we don't want in our further analysis. Therefore, in the next section we will clean-up the data and add some meta information to the `cfList`. 
@@ -94,23 +94,23 @@ As shown, both clusterID and sampleID are added to the expression data. We also 
 
 Some channels are not needed (e.g. DNA1, DNA2, barcoding, etc...). We can remove those and only keep the markers that we are actually intrested in. 
 
-```{r, eval=F}
-cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
+```{r, eval=T}
+cfData@expr <- cfData@expr[,-c(3:10, 13:16, 55:59, 61:63)]
 ```
 
 Next we will add some meta data to the `cfList`. Make sure that the sampleID corresponds with the sampleID of the meta data! When using Cytosplore, the sampleID is based on the sample tag (CSPLR_ST). 
 
-```{r, eval=F}
+```{r, eval=T}
 data(spitzer) 
-meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),] # match sampleID
-cfData$samples <- cbind(cfData$samples, meta)
+meta <- spitzer[match(row.names(cfData@samples), spitzer[,"CSPLR_ST"]),] # match sampleID
+cfData@samples <- cbind(cfData@samples, meta)
 ```
 
 Lastly, we will make some small changes to the labeling of the data. This helps with the visualization of the heatmaps and discovering relations of clusters.
 
-```{r, eval=F}
-levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
-levels(cfData$expr$sampleID) <- cfData$samples$sample_name
+```{r, eval=T}
+levels(cfData@expr[,"clusterID"]) <- gsub("[^0-9]", "", levels(cfData@expr[,"clusterID"]))  
+levels(cfData@expr[,"clusterID"]) <- cfData@samples[,"sample_name"]
 ```
 
 # 3. Visualization
@@ -121,20 +121,20 @@ Before we can create the heatmaps, we first address the last slot `counts`, whic
 
 ```{r, eval=F}
 cfData <- cellCounts(cfData)
-head(cfData$counts)
+head(cfData@counts)
 ```
 
 In many cases the abundance of the cells could be biased in respect to the sample size of the donors, therefore it could be more logical to look at the frequency of the clusters in respect to the total amount of cells per sample. We will also standardize the data (mean zero, unit variance) to better comapre the clusters.
 
-```{r, eval=F}
+```{r, eval=T}
 cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
-head(cfData$counts)
+head(cfData@counts)
 ```
 
 Now everything is ready to visualize the data. One of the main functions of this package is `cytoHeatmaps`, which is used to visualize both the phenotype of the created clusters and their heterogeneity in respect to the samples.
 
 ```{r fig.width=10, fig.height=12, fig.cap="\\label{fig:fig2}Cytofast heatmap"}
-# cytoHeatmaps(cfData, group="group", legend=TRUE)
+cytoHeatmaps(cfData, group="group", legend=TRUE)
 ```
 
 The function will plot two heatmaps:

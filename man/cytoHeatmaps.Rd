@@ -34,11 +34,11 @@ cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 
 # Add cell counts to cfList and add meta data
 cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
-meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
-cfData$samples <- cbind(cfData$samples, meta)
+meta <- spitzer[match(row.names(cfData@samples), spitzer[,"CSPLR_ST"]),]
+cfData@samples <- cbind(cfData@samples, meta)
 
 # Remove unnecessary markers
-cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
+cfData@expr <- cfData@expr[,-c(3:10, 13:16, 55:59, 61:63)]
 
 # Draw heatmaps
 cytoHeatmaps(cfData, group = "group", legend = TRUE)
