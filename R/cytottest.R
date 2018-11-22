@@ -77,7 +77,7 @@ cytottest <- function(cfList, group, adjustMethod,  ...){
      results$adjusted <- p.adjust(results[,"pvalue"], method = adjustMethod)
   }
 
-  cfList@results <- results
+  cfList@results <- list(results)
   cfList
 }
 
