@@ -103,14 +103,13 @@ Next we will add some meta data to the `cfList`. Make sure that the sampleID cor
 ```{r, eval=T}
 data(spitzer) 
 meta <- spitzer[match(row.names(cfData@samples), spitzer[,"CSPLR_ST"]),] # match sampleID
-cfData@samples <- cbind(cfData@samples, meta)
+cfData@samples <- cbind(cfData@samples, meta[,2:3])
 ```
 
 Lastly, we will make some small changes to the labeling of the data. This helps with the visualization of the heatmaps and discovering relations of clusters.
 
 ```{r, eval=T}
 levels(cfData@expr[,"clusterID"]) <- gsub("[^0-9]", "", levels(cfData@expr[,"clusterID"]))  
-levels(cfData@expr[,"clusterID"]) <- cfData@samples[,"sample_name"]
 ```
 
 # 3. Visualization
@@ -124,7 +123,7 @@ cfData <- cellCounts(cfData)
 head(cfData@counts)
 ```
 
-In many cases the abundance of the cells could be biased in respect to the sample size of the donors, therefore it could be more logical to look at the frequency of the clusters in respect to the total amount of cells per sample. We will also standardize the data (mean zero, unit variance) to better comapre the clusters.
+In many cases the abundance of the cells could be biased in respect to the sample size of the donors, therefore it is better to look at the frequency of the clusters in respect to the total amount of cells per sample. We will also standardize the data (mean zero, unit variance) for a better comparison between clusters.
 
 ```{r, eval=T}
 cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
@@ -140,7 +139,6 @@ cytoHeatmaps(cfData, group="group", legend=TRUE)
 The function will plot two heatmaps:
 + on the upper panel the phenotype (based on the markers) of each cluster
 + on the lower panel the relative abundance of the clusters in respect to the samples  
-
 A hierarchical clustering was performed on subset frequencies using the Spearmans rank correlation, resulting in a dendogram displayed on the side of the sample abundancy heatmap. This will group samples sharing similarities.  
 Groups can pre-defined as an input to 'cytoHeatmaps'. 
 
