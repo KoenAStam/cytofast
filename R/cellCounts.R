@@ -27,7 +27,6 @@
 #'
 #'
 #' @export
-
 cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
 
   if(!is(cfList, "cfList")){
@@ -36,7 +35,7 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
   if(length(cfList@expr$clusterID) == 0){
     stop("clusterID is missing from `expr` slot")
   }
-  if(length(cfList@expr$clusterID) == 0){
+  if(length(cfList@expr$sampleID) == 0){
     stop("sampleID is missing from `expr` slot")
   }
 
@@ -66,6 +65,6 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
   }
 
   # Add to cfList
-  cfList@counts <- counts
+  cfList@counts <- data.frame(counts)
   return(cfList)
 }

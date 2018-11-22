@@ -68,8 +68,8 @@ To follow this vignette we added some pre-clustered (by Cytosplore) .fcs files t
 To import the *.fcs* files created by Cytosplore, we use the function `readCytosploreFCS`. Simply give the directory where you saved your .fcs files and the function will store the data in a `cfList` (cytofast list). It is a S3 object type, so easy to use and can be manipulated like any list in *R*. When not using Cytosplore, check the function `cfList` to create such a list yourself. The main components of a `cfList` are a data frame `expr` containing the expression of the markers for all measured cells, `counts` a data frame with cell counts per cluster per sample and `samples` a data frame with all the meta information.
 
 ```{r echo=FALSE, eval=F}
-str(cfList(samples = data.frame(),
-           expr = data.frame(sampleID=as.factor(1:10), clusterID=letters[1:10]), 
+str(cfList(samples = data.frame(sampleID = as.factor(1:10)),
+           expr = data.frame(sampleID = as.factor(1:10), clusterID=letters[1:10]), 
            counts = data.frame()))
 ```
 
