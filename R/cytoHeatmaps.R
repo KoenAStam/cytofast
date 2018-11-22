@@ -49,7 +49,7 @@ cytoHeatmaps <- function(cfList, group, legend = FALSE){
   if(length(cfList@expr$clusterID) == 0){
     stop("clusterID is missing from `expr` slot")
   }
-  if(length(cfList@expr$clusterID) == 0){
+  if(length(cfList@expr$sampleID) == 0){
     stop("sampleID is missing from `expr` slot")
   }
 
