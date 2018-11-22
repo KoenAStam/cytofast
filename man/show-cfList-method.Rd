@@ -10,6 +10,9 @@
 \arguments{
 \item{object}{a cfList object}
 }
+\value{
+Prints a light version of a \code{cfList} to the console
+}
 \description{
 Show cfList object
 }

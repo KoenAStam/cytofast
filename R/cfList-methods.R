@@ -2,6 +2,10 @@
 #'
 #' @param object a cfList object
 #' 
+#' @return Prints a light version of a `cfList` to the console
+#' 
+#' 
+#' 
 setMethod("show", "cfList", function(object){
   cat("An object of class \"cfList\" \n\n")
   
@@ -43,6 +47,9 @@ setMethod("show", "cfList", function(object){
 #' a \code{numeric} or \code{character} vector. 
 #' @param j index specifying which clusters to extract. The index is either
 #' a \code{numeric} or \code{character} vector. 
+#' 
+#' @return Returns the specified clusters or samples from a `cfList`. 
+#' 
 #' 
 setMethod("[", signature(x = "cfList"), function (x, i, j){
   

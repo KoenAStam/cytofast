@@ -16,6 +16,9 @@ a \code{numeric} or \code{character} vector.}
 \item{j}{index specifying which clusters to extract. The index is either
 a \code{numeric} or \code{character} vector.}
 }
+\value{
+Returns the specified clusters or samples from a \code{cfList}.
+}
 \description{
 Extract parts of cfList
 }

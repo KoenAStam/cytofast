@@ -16,6 +16,7 @@
 #' @keywords read, data, FCS, cytosplore
 #'
 #' @importFrom flowCore read.FCS
+#' @import Rdpack
 #'
 #' @examples
 #' dirFCS <- system.file("extdata", package="cytofast")
