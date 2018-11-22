@@ -1,13 +1,14 @@
+#'@import methods
+#'@include cfList-class.R cfList-accessors.R
+NULL
+
 #' Show cfList object
 #'
-#' @param object a cfList object
-#' 
-#' @return Prints a light version of a `cfList` to the console
-#' 
-#' 
-#' 
+#' @rdname cfList-class
+#' @aliases show,cfList-method
+#' @usage NULL
 setMethod("show", "cfList", function(object){
-  cat("An object of class \"cfList\" \n\n")
+  cat("An object of class cfList \n\n")
   
   # show header samples
   if(!length(object@samples) == 0){
@@ -49,7 +50,6 @@ setMethod("show", "cfList", function(object){
 #' a \code{numeric} or \code{character} vector. 
 #' 
 #' @return Returns the specified clusters or samples from a `cfList`. 
-#' 
 #' 
 setMethod("[", signature(x = "cfList"), function (x, i, j){
   
