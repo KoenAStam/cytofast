@@ -7,7 +7,7 @@
 cytottest(cfList, group, adjustMethod, ...)
 }
 \arguments{
-\item{cfList}{a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'counts' slot.}
+\item{cfList}{a cfList object. It should contain at least data in the 'counts' slot.}
 
 \item{group}{one of:
 \itemize{
@@ -33,16 +33,16 @@ dirFCS <- system.file("extdata", package="cytofast")
 cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 
 # relabeling of clusterID
-levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
+levels(cfData@expr[,"clusterID"]) <- gsub("[^0-9]", "", levels(cfData@expr[,"clusterID"]))  
 
 # Add cell counts to cfList and add meta data
 cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
-meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
-cfData$samples <- cbind(cfData$samples, meta)
+meta <- spitzer[match(row.names(cfData@samples), spitzer$CSPLR_ST),]
+cfData@samples <- cbind(cfData@samples, meta)
 
 # Run t-test
-cfData$samples$effect <- gsub("_D\\\\d", "", spitzer$group)
+cfData@samples$effect <- gsub("_D\\\\d", "", spitzer$group)
 cfData <- cytottest(cfData, group  = "effect", adjustMethod = "bonferroni")
-cfData$results
+cfData@results
 
 }

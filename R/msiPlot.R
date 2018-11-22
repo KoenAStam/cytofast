@@ -3,7 +3,7 @@
 #' @description
 #' Function to plot the density (median signal intensity) for given markers.
 #'
-#' @param cfList a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'expr' and 'samples' slots.
+#' @param cfList a cfList object. It should contain at least data in the 'expr' and 'samples' slots.
 #' @param markers character vector with column names of the markers to be plotted. A numeric vector
 #' is also accepted, note that 1 starts after removing columns 'clusterID' and 'sampleID'.
 #' @param byGroup a character, referring to a column name in the `samples` slot of the `cfList`. This will
@@ -26,16 +26,16 @@
 #' dirFCS <- system.file("extdata", package="cytofast")
 #' cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 #' 
-#' #' # relabeling of clusterID
-#' levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
+#' # relabeling of clusterID
+#' levels(cfData@expr[,"clusterID"]) <- gsub("[^0-9]", "", levels(cfData@expr[,"clusterID"]))  
 #'
 #' # Add cell counts to cfList and add meta data
 #' cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
-#' meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
-#' cfData$samples <- cbind(cfData$samples, meta)
+#' meta <- spitzer[match(row.names(cfData@samples), spitzer$CSPLR_ST),]
+#' cfData@samples <- cbind(cfData@samples, meta)
 #' 
 #' # Remove unnecessary markers
-#' cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
+#' cfData@expr <- cfData@expr[,-c(3:10, 13:16, 55:59, 61:63)]
 #' 
 #' # Draw median signal intensity plot, by group
 #' msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), byGroup = 'group')
@@ -45,23 +45,22 @@
 #' 
 #'
 #' @export
-
 msiPlot <- function(cfList, markers, byGroup = NULL, byCluster = NULL, ...){
 
   if(!is(cfList, "cfList")){
     stop("first argument is not of class \"cfList\"")
   }
 
-  if(length(cfList$expr$clusterID) == 0){
+  if(length(cfList@expr$clusterID) == 0){
     stop("clusterID is missing from `expr` slot")
   }
 
-  if(length(cfList$expr$clusterID) == 0){
+  if(length(cfList@expr$clusterID) == 0){
     stop("sampleID is missing from `expr` slot")
   }
 
   if(is(markers, "character")){
-    if(!all(markers %in% colnames(cfList$expr))){
+    if(!all(markers %in% colnames(cfList@expr))){
       stop("\"markers\" contains a character that's not in the `expr` slot")
     }
   }
@@ -74,18 +73,18 @@ msiPlot <- function(cfList, markers, byGroup = NULL, byCluster = NULL, ...){
     stop("\"byGroup\" and \"byCluster\" are both specified, choose one")
   }
 
-  X <- cfList$expr[,!colnames(cfList$expr) %in% c("clusterID", "sampleID")][,markers, drop=FALSE]
-  clusterID <- as.factor(cfList$expr$clusterID)
-  sampleID <- as.factor(cfList$expr$sampleID)
+  X <- cfList@expr[,!colnames(cfList@expr) %in% c("clusterID", "sampleID")][,markers, drop=FALSE]
+  clusterID <- as.factor(cfList@expr$clusterID)
+  sampleID <- as.factor(cfList@expr$sampleID)
 
   if(all(unlist(lapply(X, is.numeric))) == FALSE){
     stop("Not all markers in 'expr' slot are numeric")
   }
 
   if(is(byGroup, "character") && length(byGroup) == 1){
-    if(byGroup %in% colnames(cfList$samples)){
+    if(byGroup %in% colnames(cfList@samples)){
       groups <- sampleID
-      levels(groups) <- factor(cfList$samples[,byGroup])
+      levels(groups) <- factor(cfList@samples[,byGroup])
       X <- data.frame(X, groups, check.names=FALSE)
       legendtitle <- "groups"
     } else {

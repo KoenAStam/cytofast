@@ -7,7 +7,7 @@
 cytoBoxplots(cfList, group, stat)
 }
 \arguments{
-\item{cfList}{a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'counts' slot.}
+\item{cfList}{a cfList object. It should contain at least data in the 'counts' slot.}
 
 \item{group}{one of:
 \itemize{
@@ -31,11 +31,11 @@ cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 
 # Add cell counts to cfList and add meta data
 cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
-meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
-cfData$samples <- cbind(cfData$samples, meta)
+meta <- spitzer[match(row.names(cfData@samples), spitzer$CSPLR_ST),]
+cfData@samples <- cbind(cfData@samples, meta)
 
 # Remove unnecessary markers
-cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
+cfData@expr <- cfData@expr[,-c(3:10, 13:16, 55:59, 61:63)]
 
 # Draw boxplots
 cytoBoxplots(cfData, group="group")

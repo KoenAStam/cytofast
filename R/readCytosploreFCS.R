@@ -75,8 +75,10 @@ readCytosploreFCS <- function(dir=NULL, colNames = c("names", "description")){
 
   # change order and return cfList
   x <- x[,c("clusterID", "sampleID", setdiff(colnames(x), c("clusterID", "sampleID")))]
-  output <- cfList(samples = data.frame(cellsN = as.numeric(table(x$sampleID)), row.names = levels(x$sampleID)),
-                   expr = x)
+  output <- new("cfList", samples = data.frame(cellsN = as.numeric(table(x$sampleID)),
+                                               sampleID = levels(x$sampleID),
+                                               row.names = levels(x$sampleID)),
+                          expr = x)
   return(output)
 
 }

@@ -4,7 +4,7 @@
 #' @description Performs a separate t-test on each cluster within a cfList. The output is added and can also be used
 #' by other functions
 #'
-#' @param cfList a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'counts' slot.
+#' @param cfList a cfList object. It should contain at least data in the 'counts' slot.
 #' @param group one of:
 #' * a character vector referring to a column name in the `samples` slot of the `cfList`.
 #' * a factor indicating the grouping for the t.test.
@@ -20,17 +20,17 @@
 #' cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 #' 
 #' # relabeling of clusterID
-#' levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
+#' levels(cfData@expr[,"clusterID"]) <- gsub("[^0-9]", "", levels(cfData@expr[,"clusterID"]))  
 #'
 #' # Add cell counts to cfList and add meta data
 #' cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
-#' meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
-#' cfData$samples <- cbind(cfData$samples, meta)
+#' meta <- spitzer[match(row.names(cfData@samples), spitzer$CSPLR_ST),]
+#' cfData@samples <- cbind(cfData@samples, meta)
 #' 
 #' # Run t-test
-#' cfData$samples$effect <- gsub("_D\\d", "", spitzer$group)
+#' cfData@samples$effect <- gsub("_D\\d", "", spitzer$group)
 #' cfData <- cytottest(cfData, group  = "effect", adjustMethod = "bonferroni")
-#' cfData$results
+#' cfData@results
 #' 
 #' @importFrom stats t.test p.adjust
 #' @importFrom methods is
@@ -44,22 +44,22 @@ cytottest <- function(cfList, group, adjustMethod,  ...){
     stop("first argument is not of class \"cfList\"")
   }
 
-  if(is.null(cfList$counts)){
+  if(is.null(cfList@counts)){
      stop("\"cfList\" does not contain a counts slot")
   }
 
   if(is(group, "character") && length(group) == 1){
-    if(group %in% colnames(cfList$samples)){
-      grouping <- factor(cfList$samples[,group])
+    if(group %in% colnames(cfList@samples)){
+      grouping <- factor(cfList@samples[,group])
     } else {
       stop("\"group\" is a character, but is missing from `samples` slot ")
     }
   }
-  if(is(group, "factor") && length(group) == nrow(cfList$counts)){
+  if(is(group, "factor") && length(group) == nrow(cfList@counts)){
     grouping <- group
   }
 
-  X <- cfList$counts
+  X <- cfList@counts
   results <- data.frame(matrix(0, nrow=ncol(X), ncol=3))
 
   for(i in seq_len(ncol(X))){
@@ -77,7 +77,7 @@ cytottest <- function(cfList, group, adjustMethod,  ...){
      results$adjusted <- p.adjust(results[,"pvalue"], method = adjustMethod)
   }
 
-  cfList$results <- results
+  cfList@results <- results
   cfList
 }
 

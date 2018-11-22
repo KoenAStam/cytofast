@@ -3,8 +3,8 @@
 #' @description A function to add the frequency (or abundance) of cell clusters per sample to a
 #'`cfList`.
 #'
-#' @param cfList a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'expr' slot.
-#' @param frequency one of:
+#' @param cfList a cfList object. It should contain at least data in the 'expr' slot.
+#' @param frequency one of
 #' * a logical value. if `FALSE`, the abundance of the cell counts are used. If
 #' `TRUE`, the frequency of the total amount of given cells is used.
 #' * a numeric vector of same length as amount of samples
@@ -33,16 +33,16 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
   if(!is(cfList, "cfList")){
     stop("first argument is not of class \"cfList\"")
   }
-  if(length(cfList$expr$clusterID) == 0){
+  if(length(cfList@expr$clusterID) == 0){
     stop("clusterID is missing from `expr` slot")
   }
-  if(length(cfList$expr$clusterID) == 0){
+  if(length(cfList@expr$clusterID) == 0){
     stop("sampleID is missing from `expr` slot")
   }
 
   # Retrieve sampleID and clusterID
-  clusterID <- factor(cfList$expr$clusterID)
-  sampleID <- factor(cfList$expr$sampleID)
+  clusterID <- factor(cfList@expr$clusterID)
+  sampleID <- factor(cfList@expr$sampleID)
 
   # Create counts table
   counts <- as.data.frame.matrix(table(sampleID, clusterID))
@@ -66,6 +66,6 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
   }
 
   # Add to cfList
-  cfList$counts <- counts
+  cfList@counts <- counts
   return(cfList)
 }

@@ -7,7 +7,7 @@
 msiPlot(cfList, markers, byGroup = NULL, byCluster = NULL, ...)
 }
 \arguments{
-\item{cfList}{a \code{\link[cytofast]{cfList}} object. It should contain at least data in the 'expr' and 'samples' slots.}
+\item{cfList}{a cfList object. It should contain at least data in the 'expr' and 'samples' slots.}
 
 \item{markers}{character vector with column names of the markers to be plotted. A numeric vector
 is also accepted, note that 1 starts after removing columns 'clusterID' and 'sampleID'.}
@@ -31,16 +31,16 @@ Function to plot the density (median signal intensity) for given markers.
 dirFCS <- system.file("extdata", package="cytofast")
 cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 
-#' # relabeling of clusterID
-levels(cfData$expr$clusterID) <- gsub("[^0-9]", "", levels(cfData$expr$clusterID))  
+# relabeling of clusterID
+levels(cfData@expr[,"clusterID"]) <- gsub("[^0-9]", "", levels(cfData@expr[,"clusterID"]))  
 
 # Add cell counts to cfList and add meta data
 cfData <- cellCounts(cfData, frequency = TRUE, scale = TRUE)
-meta <- spitzer[match(row.names(cfData$samples), spitzer$CSPLR_ST),]
-cfData$samples <- cbind(cfData$samples, meta)
+meta <- spitzer[match(row.names(cfData@samples), spitzer$CSPLR_ST),]
+cfData@samples <- cbind(cfData@samples, meta)
 
 # Remove unnecessary markers
-cfData$expr <- cfData$expr[,-c(3:10, 13:16, 55:59, 61:63)]
+cfData@expr <- cfData@expr[,-c(3:10, 13:16, 55:59, 61:63)]
 
 # Draw median signal intensity plot, by group
 msiPlot(cfData, markers = c("MHC.II", "CD45", "CD4"), byGroup = 'group')
