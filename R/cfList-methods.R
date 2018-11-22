@@ -30,12 +30,14 @@ setMethod("show", "cfList", function(object){
   
   # show counts
   if(!length(object@counts) == 0){
+    cat("@counts \n")
     print(object@counts)
     cat("\n")
   }
   
   # show resuls
   if(!length(object@results) == 0){
+    cat("results \n")
     print(object@results)
   }
   
@@ -46,15 +48,43 @@ setMethod("show", "cfList", function(object){
 #' @param x a cfList object from which to extract from
 #' @param i index specifying which samples to extract. The index is either
 #' a \code{numeric} or \code{character} vector. 
-#' @param j index specifying which clusters to extract. The index is either
-#' a \code{numeric} or \code{character} vector. 
+#' @param j index specifying which clusters to extract. The index must be
+#' a \code{character} vector. 
 #' 
 #' @return Returns the specified clusters or samples from a `cfList`. 
 #' 
 setMethod("[", signature(x = "cfList"), function (x, i, j){
   
-  # function
-  print("void function")
+  # Initialize
+  sampleID <- levels(x@expr$sampleID)
+  clusterID <- levels(x@expr$clusterID)
+  
+  # get sampleID
+  if(!missing(i)){
+    if(is.numeric(i) == TRUE){
+      sampleID <- as.character(x@samples[i, "sampleID"])
+    } else if(is.character(i) == TRUE){
+      sampleID <- as.character(x@samples[which(x@samples$sampleID %in% i), "sampleID"])
+    } else {
+      message("i is neither a numeric or character")
+    }
   }
-)
+  
+  # get clusterID
+  if(!missing(j)){
+    if(is.character(j) == TRUE){
+      clusterID <- as.character(x@expr[which(j %in% x@expr$clusterID), "clusterID"])
+    } else {
+      message("j is not a character")
+    }
+  }
+  
+  # return cfList
+  cfList(samples = x@samples[x@samples$sampleID %in% sampleID,],
+         expr = x@expr[x@expr$sampleID %in% sampleID & x@expr$clusterID %in% clusterID,])
+
+})
+
+
+
 
