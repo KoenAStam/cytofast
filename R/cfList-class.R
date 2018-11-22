@@ -100,11 +100,11 @@ setValidity("cfList", function(object){
   ### validity of results
   
   ### general checks
-  if(levels(object@expr$sampleID) != levels(object@samples$sampleID)){
-    valid <- FALSE
-    msg <- c(msg, "levels from \"sampleID\" do not correspond between
-             samples and expr slot")
-  }
+  #if(levels(object@expr$sampleID) != levels(object@samples$sampleID)){
+  #  valid <- FALSE
+  #  msg <- c(msg, "levels from \"sampleID\" do not correspond between
+  #           samples and expr slot")
+  #}
   
   ### message
   if(valid) TRUE else msg
