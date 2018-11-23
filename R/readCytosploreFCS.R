@@ -7,8 +7,7 @@
 #' @param colNames character string that specifies which label should be used as the column names. This
 #' could be the name of the markers 'names' or the description for the markers 'description'.
 #'
-#' @return The function returns an object of class \code{\link[base]{data.frame}}. It includes both
-#' `clusterID` and `sampleID` as variables.
+#' @return The function returns an object of class \code{\link[cytofast]{cfList}}. 
 #'
 #' @note This function is a wrapper around \code{\link[flowCore]{read.FCS}}. For more
 #' flexibility see their help page.
