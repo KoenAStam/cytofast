@@ -61,10 +61,10 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
   }
 
   if(scale){
-    counts <- data.frame(scale(counts), check.names=FALSE)
+    counts <- scale(counts)
   }
 
   # Add to cfList
-  cfList@counts <- data.frame(counts)
+  cfList@counts <- data.frame(counts, check.names=FALSE)
   return(cfList)
 }
