@@ -56,8 +56,8 @@ setMethod("show", "cfList", function(object){
 setMethod("[", signature(x = "cfList"), function (x, i, j){
   
   # Initialize
-  sampleID <- levels(x@expr$sampleID)
-  clusterID <- levels(x@expr$clusterID)
+  sampleID <- levels(factor(x@expr$sampleID))
+  clusterID <- levels(factor(x@expr$clusterID))
   
   # get sampleID
   if(!missing(i)){
@@ -68,14 +68,20 @@ setMethod("[", signature(x = "cfList"), function (x, i, j){
     } else {
       message("i is neither a numeric or character")
     }
+    if(length(sampleID) == 0){
+      stop(i, " not found in sampleID")
+    }
   }
   
   # get clusterID
   if(!missing(j)){
     if(is.character(j) == TRUE){
-      clusterID <- as.character(x@expr[which(j %in% x@expr$clusterID), "clusterID"])
+      clusterID <- as.character(x@expr[which(x@expr$clusterID %in% j), "clusterID"])
     } else {
       message("j is not a character")
+    }
+    if(length(clusterID) == 0){
+      stop(j, " not found in clusterID") 
     }
   }
   
