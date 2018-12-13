@@ -39,6 +39,16 @@ The workflow is designed around several steps, which are addressed per section. 
 5. `cytottest` and `cytogt`, functions to quantify clusters in respect to experimental conditions. The latter function
 is still under development.
 
+# Installation
+
+To install *cytofast* run the following code in the console:
+```{r, eval=FALSE}
+if (!requireNamespace("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install("cytofast")
+```
+
+
 # Creating clusters
 
 Before *cytofast* can be applied, the data should be clustered. We recommend using Cytosplore for this task, however it is certainly possible to use any other clustering algorithm. As an example, we will also show how data clustered by [FlowSOM](https://bioconductor.org/packages/release/bioc/html/FlowSOM.html) can be parsed for usage with cytofast.
@@ -65,19 +75,19 @@ library(cytofast)
 
 To follow this vignette we added some pre-clustered (by Cytosplore) .fcs files to the package. These are ten downsampled clusters from the Spitzer study and should be treated as a toy-example to discover the package. A complete analysis of the Spitzer data is reported and published in *Beyrend et al., CSBJ, 2018*.
 
-To import the *.fcs* files created by Cytosplore, we use the function `readCytosploreFCS`. Simply give the directory where you saved your .fcs files and the function will store the data in a `cfList` (cytofast list). It is a S3 object type, so easy to use and can be manipulated like any list in *R*. When not using Cytosplore, check the function `cfList` to create such a list yourself. The main components of a `cfList` are a data frame `expr` containing the expression of the markers for all measured cells, `counts` a data frame with cell counts per cluster per sample and `samples` a data frame with all the meta information.
+To import the *.fcs* files created by Cytosplore, we use the function `readCytosploreFCS`. Simply give the directory where you saved your .fcs files and the function will store the data in a `cfList` (cytofast list). When not using Cytosplore, check the function `cfList` to create such a list yourself. It is an S4 class object with several slots, a data frame `expr` containing the expression of the markers for all measured cells, `counts` a data frame with cell counts per cluster per sample and `samples` a data frame with all the meta information.
 
-```{r echo=FALSE, eval=F}
-str(cfList(samples = data.frame(sampleID = as.factor(1:10)),
-           expr = data.frame(sampleID = as.factor(1:10), clusterID=letters[1:10]), 
-           counts = data.frame()))
+```{r echo=FALSE}
+cfList(samples = data.frame(sampleID = as.factor(1:10)),
+       expr = data.frame(sampleID = as.factor(1:10), clusterID=letters[1:10]), 
+       counts = data.frame())
 ```
 
-Note that the `expr` slot needs both a column named "sampleID" and "clusterID", which are used to identify the origin of an individual cell. When using `readCytosploreFCS` this is all done automatically. 
+Note that the `expr` slot needs both a column named "sampleID" and "clusterID", which are used to identify the origin of each individual cell. When using `readCytosploreFCS` this is all done automatically. 
 
 From here you can choose to use your own data, or it's possible to follow along with the added data from Spitzer. So, let's load the data into R:
 
-```{r, eval=T}
+```{r, eval=TRUE}
 dirFCS <- system.file("extdata", package="cytofast")
 cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 ```
