@@ -21,6 +21,11 @@
 #' possible to specify a numeric vector that is treated as the total amount of cells to divide by (e.g. total CD45+ cells). 
 #' Make sure that with the latter option specify a numeric vector of same length an order as the sampleID in `cfList@samples`.
 #' 
+#' The rarity of clusters can vary greatly between each other. One cluster can make up a very large chunk of the total,
+#' whereas some clusters only contain a few cells. To equalize the importance of these clusters and make them more
+#' comparable (e.g. in the heatmaps), one could choose to scale the data. The default \code{\link[base]{scale}} is called, which
+#' both centers the data to mean zero and scales to unit variance.
+#'  
 #' @keywords counts, frequency, cells
 #'
 #' @importFrom stats median
