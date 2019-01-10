@@ -11,8 +11,16 @@
 #' @param scale a logical value. Do the cell frequencies need to be centered and scaled? The
 #' default \code{\link[base]{scale}} function is called.
 #'
-#' @return Returns a cfList with a 'counts' slot.
+#' @return Returns the given cfList with a 'counts' slot.
 #'
+#' @notes There are several ways to look at the frequency of the created clusters per sample. First, one
+#' could look at the abundance of the cells (frequency = `FALSE`). Second, the frequency of each cluster given 
+#' as a percentage of total cells of a sample. For example, if the `cfList` is a collection of CD4+ T cells clusters
+#' and one specifies frequency = `TRUE`, then the percentage of each cluster of the total CD4+ T cells is returned. 
+#' This is done for each sample separately. Lastly, if there is a specific frequency the user wants to look at it is 
+#' possible to specify a numeric vector that is treated as the total amount of cells to divide by (e.g. total CD45+ cells). 
+#' Make sure that with the latter option specify a numeric vector of same length an order as the sampleID in `cfList@samples`.
+#' 
 #' @keywords counts, frequency, cells
 #'
 #' @importFrom stats median
