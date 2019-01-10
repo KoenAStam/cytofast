@@ -32,14 +32,12 @@
 #' @export
 readCytosploreFCS <- function(dir=NULL, colNames = c("names", "description")){
 
-  # Error catching for dir
   if(is.character(dir) == FALSE){
     stop("directory is not a character string")
   } else if(dir.exists(dir) == FALSE) {
     stop("directory does not exist")
   }
 
-  # Error catching for colNames
   if(missing(colNames)){
     warning("colNames was not specified and set to 'description'")
     colNames <- "description"
@@ -48,7 +46,6 @@ readCytosploreFCS <- function(dir=NULL, colNames = c("names", "description")){
     colNames <- "description"
   }
 
-  # Path and names of FCS files
   FCSFilePaths <- list.files(path=dir, pattern=".fcs", full.names=TRUE)
   FCSFileNames <- list.files(path=dir, pattern=".fcs", full.names=FALSE)
   if(length(FCSFileNames) == 0){
@@ -86,7 +83,6 @@ readCytosploreFCS <- function(dir=NULL, colNames = c("names", "description")){
                                                row.names = levels(x$sampleID)),
                           expr = x)
   return(output)
-
 }
 
 
