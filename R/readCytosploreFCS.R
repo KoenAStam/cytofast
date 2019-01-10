@@ -9,8 +9,16 @@
 #'
 #' @return The function returns an object of class \code{\link[cytofast]{cfList}}. 
 #'
-#' @note This function is a wrapper around \code{\link[flowCore]{read.FCS}}. For more
-#' flexibility see their help page.
+#' @note To succesfully read the .FCS files created by cytosplore make sure that there are no double
+#' channels. It could happen for example that the Cytosplore tag (CSPLR_ST) is added twice, which will most 
+#' likely cause an error. Therefore, never add the sample tag twice. It is possible to remove the double
+#' tag in software like Flowjo. 
+#' 
+#' As for the `colNames` parameter, both 'names' and 'description' will always work, it 
+#' is up to the user to decide which one is most preferable. 
+#'   
+#' This function is a wrapper around \code{\link[flowCore]{read.FCS}}. For more
+#' flexibility see their help page. 
 #'
 #' @keywords read, data, FCS, cytosplore
 #'
@@ -22,7 +30,6 @@
 #' cfData <- readCytosploreFCS(dir = dirFCS, colNames = "description")
 #'
 #' @export
-
 readCytosploreFCS <- function(dir=NULL, colNames = c("names", "description")){
 
   # Error catching for dir
@@ -51,7 +58,7 @@ readCytosploreFCS <- function(dir=NULL, colNames = c("names", "description")){
   # Loop through files and read into R environment
   x <- data.frame()
   for(i in seq_along(FCSFilePaths)){
-    message(paste("Reading .FCS cluster:",i,"\n"))
+    message(paste("Reading .FCS cluster:",i))
 
     FCSfile <- flowCore::read.FCS(FCSFilePaths[i],
                         transformation=FALSE,
