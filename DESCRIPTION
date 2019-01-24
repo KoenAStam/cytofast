@@ -4,7 +4,11 @@ Version: 0.99.11
 Authors@R: c(person("K.A.", "Stam", email = "k.a.stam@hotmail.com", role = c("aut", "cre")),
 	           person("G.", "Beyrend", email = "G.Beyrend@lumc.nl", role = "aut"))
 Maintainer: K.A. Stam <k.a.stam@hotmail.com>
-Description: Cytofast can be used to visualize and explore CyTOF data.
+Description: Multi-parametric flow and mass cytometry allows exceptional high-resolution exploration of the
+cellular composition of the immune system. Together with tools like FlowSOM and Cytosplore it is possible to 
+identify novel cell types. By introducing cytofast we hope to offer a workflow for visualization
+and quantification of cell clusters for an efficient discovery of cell populations associated
+with diseases or other clinical outcomes.
 Depends: R (>= 3.5.0)
 Imports: flowCore, ggplot2, ggridges, RColorBrewer, reshape2, stats, grDevices, Rdpack, methods, grid, FlowSOM
 RdMacros: Rdpack
