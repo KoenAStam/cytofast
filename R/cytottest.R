@@ -37,8 +37,7 @@
 #'
 #'
 #' @export
-cytottest <- function(cfList, group, adjustMethod,  ...){
-
+cytottest <- function(cfList, group, adjustMethod = c("none", "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr"),  ...){
 
   if(!is(cfList, "cfList")){
     stop("first argument is not of class \"cfList\"")
@@ -72,12 +71,13 @@ cytottest <- function(cfList, group, adjustMethod,  ...){
                          paste("mean", levels(grouping)[2], sep="_"),
                          "pvalue")
   results <- cbind(clusters = colnames(X), results)
-
-  if(!missing(adjustMethod)){
-     results$adjusted <- p.adjust(results[,"pvalue"], method = adjustMethod)
+  
+  adjustMethod <- match.arg(adjustMethod)
+  if(adjustMethod != "none"){
+  results$adjusted <- p.adjust(results[,"pvalue"], method = adjustMethod)
   }
 
-  cfList@results <- list(results)
+  cfList@results <- results
   cfList
 }
 
