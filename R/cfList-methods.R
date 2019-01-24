@@ -37,7 +37,7 @@ setMethod("show", "cfList", function(object){
   
   # show resuls
   if(!length(object@results) == 0){
-    cat("results \n")
+    cat("@results \n")
     print(object@results)
   }
   
