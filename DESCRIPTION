@@ -1,6 +1,6 @@
 Package: cytofast
 Title: cytofast - A quick visualization and analysis tool for CyTOF data
-Version: 0.99.13
+Version: 0.99.14
 Authors@R: c(person("K.A.", "Stam", email = "k.a.stam@hotmail.com", role = c("aut", "cre")),
 	           person("G.", "Beyrend", email = "G.Beyrend@lumc.nl", role = "aut"))
 Maintainer: K.A. Stam <k.a.stam@hotmail.com>
@@ -9,7 +9,7 @@ Description: Multi-parametric flow and mass cytometry allows exceptional high-re
   identify novel cell types. By introducing cytofast we hope to offer a workflow for visualization
   and quantification of cell clusters for an efficient discovery of cell populations associated
   with diseases or other clinical outcomes.
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.6.0)
 Imports: flowCore, ggplot2, ggridges, RColorBrewer, reshape2, stats, grDevices, Rdpack, methods, grid, FlowSOM
 RdMacros: Rdpack
 Suggests: BiocStyle, knitr, rmarkdown
