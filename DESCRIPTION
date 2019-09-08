@@ -9,7 +9,7 @@ Description: Multi-parametric flow and mass cytometry allows exceptional high-re
   identify novel cell types. By introducing cytofast we hope to offer a workflow for visualization
   and quantification of cell clusters for an efficient discovery of cell populations associated
   with diseases or other clinical outcomes.
-Depends: R (>= 3.6.0)
+Depends: R (>= 3.5.3)
 Imports: flowCore, ggplot2, ggridges, RColorBrewer, reshape2, stats, grDevices, Rdpack, methods, grid, FlowSOM
 RdMacros: Rdpack
 Suggests: BiocStyle, knitr, rmarkdown
