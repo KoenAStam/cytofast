@@ -20,7 +20,7 @@ cellCounts(cfList, frequency = FALSE, scale = FALSE)
 default \code{\link[base]{scale}} function is called.}
 }
 \value{
-Returns a cfList with a 'counts' slot.
+Returns the given cfList with a 'counts' slot.
 }
 \description{
 A function to add the frequency (or abundance) of cell clusters per sample to a

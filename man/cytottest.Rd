@@ -4,7 +4,8 @@
 \alias{cytottest}
 \title{preform t-test on cfList}
 \usage{
-cytottest(cfList, group, adjustMethod, ...)
+cytottest(cfList, group, adjustMethod = c("none", "holm", "hochberg",
+  "hommel", "bonferroni", "BH", "BY", "fdr"), ...)
 }
 \arguments{
 \item{cfList}{a cfList object. It should contain at least data in the 'counts' slot.}
