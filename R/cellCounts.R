@@ -54,7 +54,7 @@ cellCounts <- function(cfList, frequency = FALSE, scale = FALSE){
 
   # Retrieve sampleID and clusterID
   clusterID <- factor(cfList@expr$clusterID)
-  sampleID <- factor(cfList@expr$sampleID)
+  sampleID <- factor(cfList@expr$sampleID, levels=cfList@samples$sampleID)
 
   # Create counts table
   counts <- as.data.frame.matrix(table(sampleID, clusterID))
