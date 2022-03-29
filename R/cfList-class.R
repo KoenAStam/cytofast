@@ -43,18 +43,18 @@ NULL
 #' 
 #' ## expr slot
 #' # retrieve clusters
-#' clusterID <- as.factor(fSOM$FlowSOM$map$mapping[,1])
+#' clusterID <- as.factor(fSOM$map$mapping[,1])
 #' levels(clusterID) <- fSOM$metaclustering
 #' 
 #' # retrieve samples (As example, we assume each FCS file is its own sample)
-#' sampleID <- lapply(fSOM$FlowSOM$metaData, function(x){rep(x[1], each = length(x[1]:x[2]))})
+#' sampleID <- lapply(fSOM$metaData, function(x){rep(x[1], each = length(x[1]:x[2]))})
 #' attr(sampleID, 'names') <- NULL
 #' sampleID <- as.factor(unlist(sampleID)) 
 #' levels(sampleID) <- paste("ID", 1:10, sep="_")
 #' 
 #' exprD <- data.frame(clusterID, 
 #'                     sampleID, 
-#'                     fSOM$FlowSOM$data[, c(9:11, 15:52)])
+#'                     fSOM$data[, c(9:11, 15:52)])
 #' 
 #' ## samples slot
 #' samplesD <- data.frame(sampleID = levels(sampleID), 

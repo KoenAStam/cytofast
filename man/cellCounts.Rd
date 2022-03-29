@@ -20,11 +20,25 @@ cellCounts(cfList, frequency = FALSE, scale = FALSE)
 default \code{\link[base]{scale}} function is called.}
 }
 \value{
-Returns a cfList with a 'counts' slot.
+Returns the given cfList with a 'counts' slot.
 }
 \description{
 A function to add the frequency (or abundance) of cell clusters per sample to a
 \code{cfList}.
+}
+\details{
+There are several ways to look at the frequency of the created clusters per sample. First, one
+could look at the abundance of the cells (frequency = \code{FALSE}). Second, the frequency of each cluster given
+as a percentage of total cells of a sample. For example, if the \code{cfList} is a collection of CD4+ T cells clusters
+and one specifies frequency = \code{TRUE}, then the percentage of each cluster of the total CD4+ T cells is returned.
+This is done for each sample separately. Lastly, if there is a specific frequency the user wants to look at it is
+possible to specify a numeric vector that is treated as the total amount of cells to divide by (e.g. total CD45+ cells).
+Make sure that with the latter option specify a numeric vector of same length an order as the sampleID in \code{cfList@samples}.
+
+The rarity of clusters can vary greatly between each other. One cluster can make up a very large chunk of the total,
+whereas some clusters only contain a few cells. To equalize the importance of these clusters and make them more
+comparable (e.g. in the heatmaps), one could choose to scale the data. The default \code{\link[base]{scale}} is called, which
+both centers the data to mean zero and scales to unit variance.
 }
 \examples{
 # Read Data

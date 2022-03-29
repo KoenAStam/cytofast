@@ -13,7 +13,7 @@
 #'
 #' @return Returns the given cfList with a 'counts' slot.
 #'
-#' @notes There are several ways to look at the frequency of the created clusters per sample. First, one
+#' @details There are several ways to look at the frequency of the created clusters per sample. First, one
 #' could look at the abundance of the cells (frequency = `FALSE`). Second, the frequency of each cluster given 
 #' as a percentage of total cells of a sample. For example, if the `cfList` is a collection of CD4+ T cells clusters
 #' and one specifies frequency = `TRUE`, then the percentage of each cluster of the total CD4+ T cells is returned. 

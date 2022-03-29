@@ -17,7 +17,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 biocViews: FlowCytometry, Visualization, Clustering
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Collate: 
@@ -29,6 +29,7 @@ Collate:
     'cytoHeatmaps.R'
     'cytottest.R'
     'drawTree.R'
+    'material_IO-data.R'
     'msiPlot.R'
     'readCytosploreFCS.R'
     'spitzer-data.R'

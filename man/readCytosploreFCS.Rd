@@ -13,13 +13,20 @@ readCytosploreFCS(dir = NULL, colNames = c("names", "description"))
 could be the name of the markers 'names' or the description for the markers 'description'.}
 }
 \value{
-The function returns an object of class \code{\link[base]{data.frame}}. It includes both
-\code{clusterID} and \code{sampleID} as variables.
+The function returns an object of class \code{\link[cytofast]{cfList}}.
 }
 \description{
 This function reads and combines .FCS files created specifcally by Cytosplore.
 }
 \note{
+To succesfully read the .FCS files created by cytosplore make sure that there are no double
+channels. It could happen for example that the Cytosplore tag (CSPLR_ST) is added twice, which will most
+likely cause an error. Therefore, never add the sample tag twice. It is possible to remove the double
+tag in software like Flowjo.
+
+As for the \code{colNames} parameter, both 'names' and 'description' will always work, it
+is up to the user to decide which one is most preferable.
+
 This function is a wrapper around \code{\link[flowCore]{read.FCS}}. For more
 flexibility see their help page.
 }
