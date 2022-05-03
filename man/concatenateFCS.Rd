@@ -15,7 +15,7 @@ concatenateFCS(fcsDir, filename, path = NULL)
 combined to create the fully qualifed file name. Defaults to \code{fcsDir}}
 }
 \value{
-None
+A character vector of the file name.
 }
 \description{
 Function to merge .fcs files in a given folder.

@@ -8,7 +8,7 @@
 #' @param path Path of the directory to save plot to: `path` and `filename` are
 #' combined to create the fully qualifed file name. Defaults to `fcsDir`
 #' 
-#' @return None
+#' @return A character vector of the file name.
 #'
 #' @keywords merge .fcs files 
 #'
@@ -30,7 +30,9 @@ concatenateFCS <- function(fcsDir, filename, path=NULL){
   }
   
   cellExpr <- data.frame()
+  
   for(file in fcsFiles){
+  message(paste("Reading .FCS file:", file))
     FCSData <- read.FCS(file,
                         transformation=FALSE,
                         truncate_max_range=FALSE)
@@ -43,6 +45,7 @@ concatenateFCS <- function(fcsDir, filename, path=NULL){
                            minRange=apply(cellExpr,2,min),
                            maxRange=apply(cellExpr,2,max),
                            stringsAsFactors = FALSE)
+  message("Concatenate and save new file")
   
   cData <- new("flowFrame",
                exprs = as.matrix(cellExpr),
