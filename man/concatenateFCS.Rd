@@ -21,8 +21,8 @@ A character vector of the file name.
 Function to merge .fcs files in a given folder.
 }
 \examples{
-concatenateFCS(fcsDir=system.file("extdata", package="cytofast"), 
-filename=cytofastData_merged.fcs)
+concatenateFCS(fcsDir = system.file("extdata", package="cytofast"), 
+               filename = merged/cytofastData_merged.fcs)
 
 }
 \keyword{.fcs}

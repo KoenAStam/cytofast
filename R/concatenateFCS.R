@@ -13,8 +13,8 @@
 #' @keywords merge .fcs files 
 #'
 #' @examples 
-#' concatenateFCS(fcsDir=system.file("extdata", package="cytofast"), 
-#' filename=cytofastData_merged.fcs)
+#' concatenateFCS(fcsDir = system.file("extdata", package="cytofast"), 
+#'                filename = merged/cytofastData_merged.fcs)
 #'
 #' @import flowCore 
 #'
