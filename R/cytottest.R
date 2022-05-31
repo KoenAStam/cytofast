@@ -1,4 +1,4 @@
-#' preform t-test on cfList
+#' perform t-test on cfList
 #'
 #'
 #' @description Performs a separate t-test on each cluster within a cfList. The output is added and can also be used
